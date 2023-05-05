@@ -1,0 +1,13 @@
+use-the-entire-dataset-to-perform-power-analysis
+load-libraries
+load-data
+visual-test-data
+conventional-test-data
+compute-glm-for-visual-test
+define-the-minimum-and-maximum-effect-size
+fit-the-model
+make-prediction-for-the-visual-model
+make-bootstrap-prediction-for-the-visual-model
+compute-glm-for-conventional-tests
+draw-the-plot
+conventional-group-tests

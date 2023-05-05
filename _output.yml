@@ -1,0 +1,5 @@
+bookdown::bs4_book:
+  css: bs4_style.css
+  theme:
+    primary: "#0077be"
+  repo: https://github.com/TengMCing/analysis_buffer
