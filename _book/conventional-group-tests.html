@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Conventional group tests | Analysis Buffer</title>
 <meta name="author" content="Patrick Li">
-<meta name="description" content="This is a place for me to record temporary data analysis and ideas.">
+<meta name="description" content="If we group certain conventional tests together as a single test, we need to adjust the significance level for each individual test. Considering a group test consisting of a RESET test and a BP...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Conventional group tests | Analysis Buffer">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://someurl.netlify.app/conventional-group-tests.html">
-<meta property="og:description" content="This is a place for me to record temporary data analysis and ideas.">
+<meta property="og:description" content="If we group certain conventional tests together as a single test, we need to adjust the significance level for each individual test. Considering a group test consisting of a RESET test and a BP...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Conventional group tests | Analysis Buffer">
-<meta name="twitter:description" content="This is a place for me to record temporary data analysis and ideas.">
+<meta name="twitter:description" content="If we group certain conventional tests together as a single test, we need to adjust the significance level for each individual test. Considering a group test consisting of a RESET test and a BP...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -59,6 +59,68 @@
 <h1>
 <span class="header-section-number">2</span> Conventional group tests<a class="anchor" aria-label="anchor" href="#conventional-group-tests"><i class="fas fa-link"></i></a>
 </h1>
+<p>If we group certain conventional tests together as a single test, we need to adjust the significance level for each individual test.</p>
+<p>Considering a group test consisting of a RESET test and a BP test, we can plot their <span class="math inline">\(p\)</span>-values against each other based on the simulated data.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10086</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stand_dist</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="va">conv_null_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50000</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">x_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"uniform"</span>, </span>
+<span>                     <span class="st">"normal"</span>, </span>
+<span>                     <span class="st">"lognormal"</span>, </span>
+<span>                     <span class="st">"even_discrete"</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/switch.html">switch</a></span><span class="op">(</span><span class="va">x_dist</span>,</span>
+<span>              uniform <span class="op">=</span> <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">rand_uniform</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>              normal <span class="op">=</span> <span class="op">{</span></span>
+<span>                <span class="va">raw_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">rand_normal</a></span><span class="op">(</span>sigma <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span>                <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">closed_form</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stand_dist</span><span class="op">(</span><span class="va">raw_x</span><span class="op">)</span><span class="op">)</span></span>
+<span>                <span class="op">}</span>,</span>
+<span>              lognormal <span class="op">=</span> <span class="op">{</span></span>
+<span>                <span class="va">raw_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">rand_lognormal</a></span><span class="op">(</span>sigma <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
+<span>                <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">closed_form</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stand_dist</span><span class="op">(</span><span class="va">raw_x</span><span class="op">/</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>                <span class="op">}</span>,</span>
+<span>              even_discrete <span class="op">=</span> <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">rand_uniform_d</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">5</span>, even <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>        </span>
+<span>  <span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tengmcing.github.io/visage/reference/portal.html">poly_model</a></span><span class="op">(</span>include_z <span class="op">=</span> <span class="cn">FALSE</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">300</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">tmp_dat</span> <span class="op">&lt;-</span> <span class="va">mod</span><span class="op">$</span><span class="fu">gen</span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x_dist <span class="op">=</span> <span class="va">x_dist</span>,</span>
+<span>         n <span class="op">=</span> <span class="va">n</span>,</span>
+<span>         F_p_value <span class="op">=</span> <span class="va">mod</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">tmp_dat</span><span class="op">)</span><span class="op">$</span><span class="va">p_value</span>,</span>
+<span>         RESET_p_value <span class="op">=</span> <span class="va">mod</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">tmp_dat</span>, </span>
+<span>                                  test <span class="op">=</span> <span class="st">"RESET"</span>, </span>
+<span>                                  power <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, </span>
+<span>                                  power_type <span class="op">=</span> <span class="st">"fitted"</span><span class="op">)</span><span class="op">$</span><span class="va">p_value</span>,</span>
+<span>         BP_p_value <span class="op">=</span> <span class="va">HETER_MODEL</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">tmp_dat</span><span class="op">)</span><span class="op">$</span><span class="va">p_value</span>,</span>
+<span>         SW_p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">tmp_dat</span><span class="op">$</span><span class="va">.resid</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>,</span>
+<span>         boot_id <span class="op">=</span> <span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conv_null_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density_2d.html">geom_density2d_filled</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">RESET_p_value</span>, <span class="va">BP_p_value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"RESET p-value"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"BP p-value"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-entire-set_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
+<p>We can pick a rectangle area at the bottom left corner such that <span class="math inline">\(P(\text{RESET rejects } H_0 \text{ or BP rejects } H_0) = \alpha\)</span>. The side length of this rectangle is denoted as <span class="math inline">\(\alpha^*\)</span>.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha_star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.05</span>, <span class="fl">0.0005</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">alpha_star</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">conv_null_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">RESET_p_value</span> <span class="op">&lt;=</span> <span class="va">alpha_star</span> <span class="op">|</span> <span class="va">BP_p_value</span> <span class="op">&lt;=</span> <span class="va">alpha_star</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">conv_null_dat</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.05</span>, <span class="fl">0.0005</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">.</span> <span class="op">-</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha_star</span></span>
+<span><span class="co">#&gt; [1] 0.0266</span></span></code></pre></div>
 
 </div>
   <div class="chapter-nav">
@@ -91,6 +153,34 @@
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>
