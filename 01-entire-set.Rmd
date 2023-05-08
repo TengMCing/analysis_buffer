@@ -269,3 +269,68 @@ alpha_star <- map_dbl(seq(0.0001, 0.05, 0.0005), function(alpha_star) {
 alpha_star
 ```
 
+## Fit GLM
+
+```{r}
+conv_test_group_dat <- conv_test_dat %>%
+  mutate(`Group test (RESET & BP)_p_value` = ifelse(RESET4_p_value <= alpha_star | BP_p_value <= alpha_star, 0, 1)) %>%
+  relocate(`Group test (RESET & BP)_p_value`, .after = SW_p_value)
+```
+
+```{r cache = TRUE}
+conv_pred_group <- conv_test_group_dat %>%
+  select(-RESET3_p_value, -(RESET5_p_value:RESET10_p_value), -F_p_value) %>%
+  rename(RESET_p_value = RESET4_p_value) %>%
+  pivot_longer(RESET_p_value:`Group test (RESET & BP)_p_value`) %>%
+  mutate(name = gsub("_p_value", " test", name)) %>%
+  mutate(reject = value <= 0.05) %>%
+  select(effect_size, name, reject) %>%
+  mutate(offset0 = log(0.05/0.95)) %>%
+  nest(dat = c(effect_size, offset0, reject)) %>%
+  mutate(mod = map(dat, 
+                   ~glm(reject ~ effect_size - 1, 
+                        family = binomial(), 
+                        data = .x,
+                        offset = offset0))) %>%
+  mutate(power = map(mod, function(mod) {
+    data.frame(effect_size = exp(seq(log(min_es),
+                                     log(max_es),
+                                     0.1)),
+               offset0 = log(0.05/0.95)) %>%
+      mutate(power = predict(mod, type = "response", newdata = .))
+  })) %>%
+  select(-dat, -mod) %>%
+  unnest(power) %>%
+  select(-offset0) %>%
+  mutate(log_effect_size = log(effect_size))
+```
+
+## Draw plot
+
+```{r}
+ggplot() +
+  geom_point(data = visual_test_dat,
+             aes(log(effect_size), as.numeric(p_value <= 0.05)),
+             alpha = 0.15) +
+  
+  geom_line(data = conv_pred_group,
+            aes(log_effect_size, power, col = name),
+            size = 1) +
+  
+  geom_line(data = visual_boot_pred,
+            aes(log_effect_size, power, col = "visual test", group = boot_id),
+            size = 1,
+            alpha = 0.01) +
+  
+  geom_line(data = visual_pred,
+            aes(log_effect_size, power, col = "visual test"), 
+            size = 1) +
+  
+  theme_light() +
+  scale_color_manual(values = rev(rcartocolor::carto_pal(5, "Vivid"))) +
+  xlab(expression(log[e] (Effect_size))) +
+  ylab("Power") +
+  labs(col = "", size = "# lineups")
+```
+
+The group test has higher power than the visual test in this case.

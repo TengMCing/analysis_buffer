@@ -11,3 +11,5 @@ make-bootstrap-prediction-for-the-visual-model
 compute-glm-for-conventional-tests
 draw-the-plot
 conventional-group-tests
+fit-glm
+draw-plot
