@@ -13,3 +13,6 @@ draw-the-plot
 conventional-group-tests
 fit-glm
 draw-plot
+group-test-reset-bp-and-sw
+fit-glm-1
+draw-plot-1
