@@ -483,3 +483,64 @@ The sensitivity of the tests are ordered as follows:
 
 
 
+# Compute vision models
+
+## Data
+
+There are `r nrow(visage::vi_survey)` observations in `vi_survey`. This includes all the attention checks and null lineups. If we need more data, the cost per observation is around 0.25 Australian Dollar. The time needs for collecting the data is around 6 minutes per observation. 
+
+## Types of model grouped by types of training data
+
+- Pure human training data
+- Simulated data + human data
+- Pure simulated data
+
+If we want a model that can mimic the behaviour of human, the direct way to train it is to use human data. 
+
+A larger training set can be formed if simulated data are also used.
+
+Model trained with pure simulated data may not perform like humans. It is more like a conventional test that summarizes the information of residuals. Though it may not like a visual test conducted by human, it is still valuable.
+
+#### Concerns
+
+Do we have sufficient data to train such a model? Some say we generally need >1000 images for a label.
+
+Can the model detect residual departures other than non-linearity and heteroskedasticity? 
+- It depends. If the model actually learns to select the most different residual plot, there is a chance of detecting other departures. But if the model only learns to detect the shapes we feed, then it probably will not be able to do it, unless other departures share similar characteristics of non-linearity and heteroskedasticity.
+
+Can the model detect non-linearity and heteroskedasticity shapes other than what we design?
+
+
+## Potential methods
+
+https://paperswithcode.com/
+
+### Cores of computer vision models
+
+- CNN
+  - Pooling layers
+  - Convolutional layers
+- Boltzmann family
+  - Restricted Boltzmann Machines
+  - Deep Belief Networks
+  - Deep Boltzmann Machines
+- Autoencoder
+  - Denoising Autoencoders
+  - Stacked Autoencoders
+
+
+
+- Autoencoders
+  - Distance between two data points in the embedding space (e.g. Faiss - Facebook)
+  - Anomaly detection
+  
+
+
+
+# Check consistency of $c_i/K$
+
+```{r}
+
+```
+
+Check p-values given by same $c_i/K$ but different $K$.

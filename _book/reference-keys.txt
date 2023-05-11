@@ -16,3 +16,9 @@ draw-plot
 group-test-reset-bp-and-sw
 fit-glm-1
 draw-plot-1
+compute-vision-models
+data
+types-of-model-grouped-by-types-of-training-data
+concerns
+potential-methods
+cores-of-computer-vision-models
