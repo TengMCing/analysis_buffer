@@ -1,0 +1,149 @@
+<!-- # Compute vision models -->
+
+
+<!-- ## Potential methods -->
+
+<!-- https://paperswithcode.com/ -->
+
+<!-- ### Cores of computer vision models -->
+
+<!-- - CNN -->
+<!--   - Pooling layers -->
+<!--   - Convolutional layers -->
+<!-- - Boltzmann family -->
+<!--   - Restricted Boltzmann Machines -->
+<!--   - Deep Belief Networks -->
+<!--   - Deep Boltzmann Machines -->
+<!-- - Autoencoder -->
+<!--   - Denoising Autoencoders -->
+<!--   - Stacked Autoencoders -->
+
+
+<!-- - Autoencoders -->
+<!--   - Distance between two data points in the embedding space (e.g. Faiss - Facebook) -->
+<!--   - Anomaly detection -->
+
+
+
+# Automatic Visual Inference System
+
+```{r}
+library(tidyverse)
+library(visage)
+```
+
+## Objectives
+
+The system's objective described in the first and second milestone reports is to evaluate lineups of data plots, specifically residual plots, such that visual tests can be conducted without the involvement of humans.
+
+When conducting a visual test, we generally request the participant to select the most different plot from a lineup, or in some cases, select multiple most different plots from a lineup. Automating the visual test means the system needs the ability to complete the same task - select the most different plot from a lineup. 
+
+Within the context of residual plots, the most different plot is likely to be the one that does not look like a good residual plot. It may also contain visual patterns indicating model violations. Therefore, measuring how different a plot is from good residual plots could also be a potential solution. In other words, the system needs to select the one that looks least like a good residual plot. However, it can be anticipated that this system would not work for other types of data plots, such as bar plots. To accomplish the same task, we need a general-purpose (in the sense of data plots) image comparison algorithm. 
+
+## Model Violations
+
+Other than giving p-values for visual tests, the system may also detect the potential issues from the residual plots. These model violations have to be declared and exposed to the system beforehand.
+
+There are two violations considered in the paper - non-linearity and heteroskedasticity. We simulate non-linearity with Hermite polynomials and simulate heteroskedasticity with quadratic variance function. There are other forms of non-linearity, such as inverse and exponential functions of the predictors. Heteroskedasticity could also exhibit shapes other than “triangle” and “butterfly”.
+
+Non-normality is also mentioned in the paper. It is a violation of the classical normal linear regression model assumption, which is important for conducting hypothesis testing and interval estimation. This violation can be simulated with different commonly assumed distributions, like the student’s t-distribution and uniform distribution.
+
+Autocorrelation is another worth-checking model violation. It happens when the errors are correlated with themselves at different time periods. Regression analysis literature recommends the use of the Durbin-Watson test. It is similar to checking the lag one sample autocorrelation coefficient. We can simulate this model violation with an AR(1) model.
+
+These are the model violations commonly checked in residual diagnostics. Instead of simulating the model violation separately, we can also simulate mixed model violations, such as a combination of non-linearity and non-normality.
+
+## Inputs and outpus
+
+Grouped by different kinds of inputs and outputs, we can design the system differently.
+
+If we consider the input to be a single residual plot, it will be better if the aesthetic of the plot is standardised. Users generally have access to the raw residuals and the fitted values. We may provide a function to help them to produce such a residual plot.
+
+Input: Single standard residual plot
+Output: The probability of the plot begin rejected by a visual test.
+
+Input: Single standard residual plot
+Output: The probability of the plot exhibiting any residual departures.
+
+Raw-Input: Residuals and fitted values
+Input: Single standard residual plot
+Output: The probability of the plot exhibiting any residual departures.
+
+As mentioned above, the system may also provide the type of model violations. This can usually be done by a multiclass classifier.
+
+Raw-Input: Residuals and fitted values
+Input: Single standard residual plot
+Output: The probability of the plot exhibiting each departure (multiclass).
+
+Additionally, raw numerical data may be used as additional information to help make accurate predictions.
+
+Raw-Input: Residuals and fitted values
+Input: Standard residual plot & residuals
+Output: The probability of the plot exhibiting any residual departures.
+
+Raw-Input: Residuals and fitted values
+Input: Standard residual plot & residuals
+Output: The probability of the plot exhibiting each departure (multiclass).
+
+If we would like to follow the lineup protocol, then the input of the system would be a lineup of residual plots. We can ask the system to perform the same task as humans, which is to select the most different plot(s).
+
+Input: Multiple residual plots (from a lineup)
+Output: Most different plot.
+
+Input: Multiple residual plots (from a lineup)
+Output: Most different plots.
+
+Further, unlike humans, computer vision models can possibly produce a ranking of residual plots from a lineup. With the ranking, a novel inference method can be developed.
+
+Input: Multiple residual plots (from a lineup)
+Output: Ranking (most different plot)
+
+
+## Data
+
+In terms of training computer vision model(s) embedded in the system. We need to consider what data is available at the moment. We have 8860 lineup evaluations collected from the experiment. This means we at least have a few thousand images per class (null plot or not). 
+
+If we need more data, the cost per observation is around 0.25 Australian Dollars. The time needs for collecting the data is around 6 minutes per observation. 
+
+We could also let the model learn the characteristics of null plots by exposing simulated null plots to it.
+
+These are the potential sources of the data.
+
+- Pure human data
+- Simulated data + human data
+- Pure simulated data
+
+If we want a model that can mimic the behaviour of humans, the direct way to train it is to use human data. However, a larger training set can be formed if simulated data are also used. Models trained with pure simulated data may not perform like humans. It is more like a conventional test that summarizes the information of residuals. Though it may not be like a visual test conducted by humans, it is still valuable.
+
+
+## Architectures
+
+In terms of model architectures, we first need to consider the availability of the source code. Due to time constraint, we possibility need to borrow CNN model structures from existing model, such as VGG16 and ResNet. 
+
+There are different kinds of CNN model architectures can be considered:
+
+- Traditional image classifier
+  - VGG16, VGG19, etc.
+  - Available as Keras Applications
+  - Mature APIs
+  - But it only accepts a single image at a time, so if we want to use multiple images as the input, we need to design a new model.
+- Generative adversarial network
+  - Based on the idea of autoencoders
+  - Reproduce null plots
+  - Denoise null plots
+  - If the reproduced target plot is very different from the target plot, it is likely to be a plot exhibiting residual departures. 
+  
+
+
+## Concerns
+
+Do we have sufficient data to train such a model? Some say we generally need >1000 images for a label.
+
+Can the model detect residual departures other than non-linearity and heteroskedasticity? 
+- It depends. If the model actually learns to select the most different residual plot, there is a chance of detecting other departures. But if the model only learns to detect the shapes we feed, then it probably will not be able to do it, unless other departures share similar characteristics of non-linearity and heteroskedasticity.
+
+Can the model detect non-linearity and heteroskedasticity shapes other than what we design?
+
+Can the model be applied to other data plots?
+
+
+<!-- ## Humans VS Computer -->

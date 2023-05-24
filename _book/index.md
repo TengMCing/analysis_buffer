@@ -1,7 +1,7 @@
 --- 
 title: "Analysis Buffer"
 author: "Patrick Li"
-date: "2023-05-12"
+date: "2023-05-24"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -13,7 +13,6 @@ csl: chicago-fullnote-bibliography.csl
 ---
 
 # Welcome {-}
-
 
 
 <a href = "javascript:window.location.reload(true)"><img src="images/cover.jpeg" width="250" height="366" class="cover" /></a> This is a place for me to record temporary data analysis and ideas.

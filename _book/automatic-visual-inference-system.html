@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Automatic Visual Inference System | Analysis Buffer</title>
+<meta name="author" content="Patrick Li">
+<meta name="description" content="library(tidyverse) library(visage)  4.1 Objectives The system’s objective described in the first and second milestone reports is to evaluate lineups of data plots, specifically residual plots,...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Automatic Visual Inference System | Analysis Buffer">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://someurl.netlify.app/automatic-visual-inference-system.html">
+<meta property="og:description" content="library(tidyverse) library(visage)  4.1 Objectives The system’s objective described in the first and second milestone reports is to evaluate lineups of data plots, specifically residual plots,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Automatic Visual Inference System | Analysis Buffer">
+<meta name="twitter:description" content="library(tidyverse) library(visage)  4.1 Objectives The system’s objective described in the first and second milestone reports is to evaluate lineups of data plots, specifically residual plots,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Analysis Buffer</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations.html"><span class="header-section-number">1</span> Check the performance of conventional tests and visual tests in detecting model violations</a></li>
+<li><a class="" href="conventional-combine-tests.html"><span class="header-section-number">2</span> Conventional combine tests</a></li>
+<li><a class="" href="combined-tests-reset-bp-and-sw.html"><span class="header-section-number">3</span> Combined tests (RESET, BP and SW)</a></li>
+<li><a class="active" href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/TengMCing/analysis_buffer">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="automatic-visual-inference-system" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Automatic Visual Inference System<a class="anchor" aria-label="anchor" href="#automatic-visual-inference-system"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tengmcing.github.io/visage/">visage</a></span><span class="op">)</span></span></code></pre></div>
+<div id="objectives" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives"><i class="fas fa-link"></i></a>
+</h2>
+<p>The system’s objective described in the first and second milestone reports is to evaluate lineups of data plots, specifically residual plots, such that visual tests can be conducted without the involvement of humans.</p>
+<p>When conducting a visual test, we generally request the participant to select the most different plot from a lineup, or in some cases, select multiple most different plots from a lineup. Automating the visual test means the system needs the ability to complete the same task - select the most different plot from a lineup.</p>
+<p>Within the context of residual plots, the most different plot is likely to be the one that does not look like a good residual plot. It may also contain visual patterns indicating model violations. Therefore, measuring how different a plot is from good residual plots could also be a potential solution. In other words, the system needs to select the one that looks least like a good residual plot. However, it can be anticipated that this system would not work for other types of data plots, such as bar plots. To accomplish the same task, we need a general-purpose (in the sense of data plots) image comparison algorithm.</p>
+</div>
+<div id="model-violations" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Model Violations<a class="anchor" aria-label="anchor" href="#model-violations"><i class="fas fa-link"></i></a>
+</h2>
+<p>Other than giving p-values for visual tests, the system may also detect the potential issues from the residual plots. These model violations have to be declared and exposed to the system beforehand.</p>
+<p>There are two violations considered in the paper - non-linearity and heteroskedasticity. We simulate non-linearity with Hermite polynomials and simulate heteroskedasticity with quadratic variance function. There are other forms of non-linearity, such as inverse and exponential functions of the predictors. Heteroskedasticity could also exhibit shapes other than “triangle” and “butterfly”.</p>
+<p>Non-normality is also mentioned in the paper. It is a violation of the classical normal linear regression model assumption, which is important for conducting hypothesis testing and interval estimation. This violation can be simulated with different commonly assumed distributions, like the student’s t-distribution and uniform distribution.</p>
+<p>Autocorrelation is another worth-checking model violation. It happens when the errors are correlated with themselves at different time periods. Regression analysis literature recommends the use of the Durbin-Watson test. It is similar to checking the lag one sample autocorrelation coefficient. We can simulate this model violation with an AR(1) model.</p>
+<p>These are the model violations commonly checked in residual diagnostics. Instead of simulating the model violation separately, we can also simulate mixed model violations, such as a combination of non-linearity and non-normality.</p>
+</div>
+<div id="inputs-and-outpus" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Inputs and outpus<a class="anchor" aria-label="anchor" href="#inputs-and-outpus"><i class="fas fa-link"></i></a>
+</h2>
+<p>Grouped by different kinds of inputs and outputs, we can design the system differently.</p>
+<p>If we consider the input to be a single residual plot, it will be better if the aesthetic of the plot is standardised. Users generally have access to the raw residuals and the fitted values. We may provide a function to help them to produce such a residual plot.</p>
+<p>Input: Single standard residual plot
+Output: The probability of the plot begin rejected by a visual test.</p>
+<p>Input: Single standard residual plot
+Output: The probability of the plot exhibiting any residual departures.</p>
+<p>Raw-Input: Residuals and fitted values
+Input: Single standard residual plot
+Output: The probability of the plot exhibiting any residual departures.</p>
+<p>As mentioned above, the system may also provide the type of model violations. This can usually be done by a multiclass classifier.</p>
+<p>Raw-Input: Residuals and fitted values
+Input: Single standard residual plot
+Output: The probability of the plot exhibiting each departure (multiclass).</p>
+<p>Additionally, raw numerical data may be used as additional information to help make accurate predictions.</p>
+<p>Raw-Input: Residuals and fitted values
+Input: Standard residual plot &amp; residuals
+Output: The probability of the plot exhibiting any residual departures.</p>
+<p>Raw-Input: Residuals and fitted values
+Input: Standard residual plot &amp; residuals
+Output: The probability of the plot exhibiting each departure (multiclass).</p>
+<p>If we would like to follow the lineup protocol, then the input of the system would be a lineup of residual plots. We can ask the system to perform the same task as humans, which is to select the most different plot(s).</p>
+<p>Input: Multiple residual plots (from a lineup)
+Output: Most different plot.</p>
+<p>Input: Multiple residual plots (from a lineup)
+Output: Most different plots.</p>
+<p>Further, unlike humans, computer vision models can possibly produce a ranking of residual plots from a lineup. With the ranking, a novel inference method can be developed.</p>
+<p>Input: Multiple residual plots (from a lineup)
+Output: Ranking (most different plot)</p>
+</div>
+<div id="data" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Data<a class="anchor" aria-label="anchor" href="#data"><i class="fas fa-link"></i></a>
+</h2>
+<p>In terms of training computer vision model(s) embedded in the system. We need to consider what data is available at the moment. We have 8860 lineup evaluations collected from the experiment. This means we at least have a few thousand images per class (null plot or not).</p>
+<p>If we need more data, the cost per observation is around 0.25 Australian Dollars. The time needs for collecting the data is around 6 minutes per observation.</p>
+<p>We could also let the model learn the characteristics of null plots by exposing simulated null plots to it.</p>
+<p>These are the potential sources of the data.</p>
+<ul>
+<li>Pure human data</li>
+<li>Simulated data + human data</li>
+<li>Pure simulated data</li>
+</ul>
+<p>If we want a model that can mimic the behaviour of humans, the direct way to train it is to use human data. However, a larger training set can be formed if simulated data are also used. Models trained with pure simulated data may not perform like humans. It is more like a conventional test that summarizes the information of residuals. Though it may not be like a visual test conducted by humans, it is still valuable.</p>
+</div>
+<div id="architectures" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Architectures<a class="anchor" aria-label="anchor" href="#architectures"><i class="fas fa-link"></i></a>
+</h2>
+<p>In terms of model architectures, we first need to consider the availability of the source code. Due to time constraint, we possibility need to borrow CNN model structures from existing model, such as VGG16 and ResNet.</p>
+<p>There are different kinds of CNN model architectures can be considered:</p>
+<ul>
+<li>Traditional image classifier
+<ul>
+<li>VGG16, VGG19, etc.</li>
+<li>Available as Keras Applications</li>
+<li>Mature APIs</li>
+<li>But it only accepts a single image at a time, so if we want to use multiple images as the input, we need to design a new model.</li>
+</ul>
+</li>
+<li>Generative adversarial network
+<ul>
+<li>Based on the idea of autoencoders</li>
+<li>Reproduce null plots</li>
+<li>Denoise null plots</li>
+<li>If the reproduced target plot is very different from the target plot, it is likely to be a plot exhibiting residual departures.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="concerns" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Concerns<a class="anchor" aria-label="anchor" href="#concerns"><i class="fas fa-link"></i></a>
+</h2>
+<p>Do we have sufficient data to train such a model? Some say we generally need &gt;1000 images for a label.</p>
+<p>Can the model detect residual departures other than non-linearity and heteroskedasticity?
+- It depends. If the model actually learns to select the most different residual plot, there is a chance of detecting other departures. But if the model only learns to detect the shapes we feed, then it probably will not be able to do it, unless other departures share similar characteristics of non-linearity and heteroskedasticity.</p>
+<p>Can the model detect non-linearity and heteroskedasticity shapes other than what we design?</p>
+<p>Can the model be applied to other data plots?</p>
+<!-- ## Humans VS Computer -->
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="combined-tests-reset-bp-and-sw.html"><span class="header-section-number">3</span> Combined tests (RESET, BP and SW)</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#automatic-visual-inference-system"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
+<li><a class="nav-link" href="#objectives"><span class="header-section-number">4.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#model-violations"><span class="header-section-number">4.2</span> Model Violations</a></li>
+<li><a class="nav-link" href="#inputs-and-outpus"><span class="header-section-number">4.3</span> Inputs and outpus</a></li>
+<li><a class="nav-link" href="#data"><span class="header-section-number">4.4</span> Data</a></li>
+<li><a class="nav-link" href="#architectures"><span class="header-section-number">4.5</span> Architectures</a></li>
+<li><a class="nav-link" href="#concerns"><span class="header-section-number">4.6</span> Concerns</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/TengMCing/analysis_buffer/blob/master/03-computer-vision-LR.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/TengMCing/analysis_buffer/edit/master/03-computer-vision-LR.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

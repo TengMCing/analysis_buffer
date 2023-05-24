@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Check the performance of conventional tests and visual tests in detecting model violations | Analysis Buffer</title>
+<meta name="author" content="Patrick Li">
+<meta name="description" content="We have compared the performance of conventional tests and visual tests in detecting non-linearity and heteroskedasticity separately. In this chapter, we try to conduct a similar analysis but on...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Check the performance of conventional tests and visual tests in detecting model violations | Analysis Buffer">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://someurl.netlify.app/check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations.html">
+<meta property="og:description" content="We have compared the performance of conventional tests and visual tests in detecting non-linearity and heteroskedasticity separately. In this chapter, we try to conduct a similar analysis but on...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Check the performance of conventional tests and visual tests in detecting model violations | Analysis Buffer">
+<meta name="twitter:description" content="We have compared the performance of conventional tests and visual tests in detecting non-linearity and heteroskedasticity separately. In this chapter, we try to conduct a similar analysis but on...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Analysis Buffer</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="active" href="check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations.html"><span class="header-section-number">1</span> Check the performance of conventional tests and visual tests in detecting model violations</a></li>
+<li><a class="" href="conventional-combine-tests.html"><span class="header-section-number">2</span> Conventional combine tests</a></li>
+<li><a class="" href="combined-tests-reset-bp-and-sw.html"><span class="header-section-number">3</span> Combined tests (RESET, BP and SW)</a></li>
+<li><a class="" href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/TengMCing/analysis_buffer">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Check the performance of conventional tests and visual tests in detecting model violations<a class="anchor" aria-label="anchor" href="#check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations"><i class="fas fa-link"></i></a>
+</h1>
+<p>We have compared the performance of conventional tests and visual tests in detecting non-linearity and heteroskedasticity separately. In this chapter, we try to conduct a similar analysis but on the entire set of data. Using conventional tests to test residual departures they are not designed for may introduce Type III error. For example, the RESET test may correctly reject the null hypothesis but fail to identify the alternative hypothesis is the existence of heteroskedasticity.</p>
+<div id="load-libraries" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Load libraries<a class="anchor" aria-label="anchor" href="#load-libraries"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tengmcing.github.io/visage/">visage</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="load-data" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Load data<a class="anchor" aria-label="anchor" href="#load-data"><i class="fas fa-link"></i></a>
+</h2>
+<div id="visual-test-data" class="section level3" number="1.2.1">
+<h3>
+<span class="header-section-number">1.2.1</span> Visual test data<a class="anchor" aria-label="anchor" href="#visual-test-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Data with uniform distribution will be used similar to the paper.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">visual_test_dat</span> <span class="op">&lt;-</span> <span class="va">vi_survey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">x_dist</span> <span class="op">==</span> <span class="st">"uniform"</span>, <span class="op">!</span><span class="va">attention_check</span>, <span class="op">!</span><span class="va">null_lineup</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">unique_lineup_id</span>, <span class="va">effect_size</span>, <span class="va">type</span>, <span class="va">p_value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">unique_lineup_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">first</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">visual_test_dat</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">#&gt;   unique_lineup_id effect_size type                p_value</span></span>
+<span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">1</span> heter_101             272.   heteroskedasticity 0.000<span style="text-decoration: underline;">269</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">2</span> heter_105               1.84 heteroskedasticity 0.824   </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">3</span> heter_110              20.6  heteroskedasticity 0.924   </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">4</span> heter_116              40.8  heteroskedasticity 0.043<span style="text-decoration: underline;">8</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">5</span> heter_120               7.97 heteroskedasticity 0.014<span style="text-decoration: underline;">7</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">6</span> heter_121              44.3  heteroskedasticity 0.060<span style="text-decoration: underline;">5</span></span></span></code></pre></div>
+</div>
+<div id="conventional-test-data" class="section level3" number="1.2.2">
+<h3>
+<span class="header-section-number">1.2.2</span> Conventional test data<a class="anchor" aria-label="anchor" href="#conventional-test-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>The simulation data is borrowed from the paper.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">poly_conv_sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/poly_conventional_simulation.rds"</span><span class="op">)</span></span>
+<span><span class="va">heter_conv_sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/heter_conventional_simulation.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Borrow effect size from the survey</span></span>
+<span><span class="va">poly_conv_sim</span> <span class="op">&lt;-</span> <span class="va">poly_conv_sim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">vi_survey</span>, <span class="va">type</span> <span class="op">==</span> <span class="st">"polynomial"</span><span class="op">)</span>, </span>
+<span>                   <span class="va">shape</span>, <span class="va">e_sigma</span>, <span class="va">n</span>, <span class="va">x_dist</span>, <span class="va">effect_size</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">heter_conv_sim</span> <span class="op">&lt;-</span> <span class="va">heter_conv_sim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">vi_survey</span>, <span class="va">type</span> <span class="op">==</span> <span class="st">"heteroskedasticity"</span><span class="op">)</span>, </span>
+<span>                   <span class="va">a</span>, <span class="va">b</span>, <span class="va">n</span>, <span class="va">x_dist</span>, <span class="va">effect_size</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conv_test_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">poly_conv_sim</span>, <span class="va">heter_conv_sim</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">x_dist</span> <span class="op">==</span> <span class="st">"uniform"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">conv_test_dat</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># A tibble: 6 × 19</span></span></span>
+<span><span class="co">#&gt;   shape e_sigma x_dist     n F_p_v…¹ RESET…² RESET…³ RESET…⁴</span></span>
+<span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">1</span>     3       1 unifo…    50 5.24<span style="color: #555555;">e</span><span style="color: #BB0000;">-5</span>   0.152 9.15<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span> 8.29<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">2</span>     3       1 unifo…    50 5.24<span style="color: #555555;">e</span><span style="color: #BB0000;">-5</span>   0.152 9.15<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span> 8.29<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">3</span>     3       1 unifo…    50 5.24<span style="color: #555555;">e</span><span style="color: #BB0000;">-5</span>   0.152 9.15<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span> 8.29<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">4</span>     3       1 unifo…    50 5.24<span style="color: #555555;">e</span><span style="color: #BB0000;">-5</span>   0.152 9.15<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span> 8.29<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">5</span>     3       1 unifo…    50 5.24<span style="color: #555555;">e</span><span style="color: #BB0000;">-5</span>   0.152 9.15<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span> 8.29<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">6</span>     3       1 unifo…    50 5.24<span style="color: #555555;">e</span><span style="color: #BB0000;">-5</span>   0.152 9.15<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span> 8.29<span style="color: #555555;">e</span><span style="color: #BB0000;">-4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"># … with 11 more variables: RESET6_p_value &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">#   RESET7_p_value &lt;dbl&gt;, RESET8_p_value &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">#   RESET9_p_value &lt;dbl&gt;, RESET10_p_value &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">#   BP_p_value &lt;dbl&gt;, SW_p_value &lt;dbl&gt;, boot_id &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">#   effect_size &lt;dbl&gt;, a &lt;dbl&gt;, b &lt;dbl&gt;, and abbreviated</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">#   variable names ¹​F_p_value, ²​RESET3_p_value,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">#   ³​RESET4_p_value, ⁴​RESET5_p_value</span></span></span></code></pre></div>
+</div>
+</div>
+<div id="compute-glm-for-visual-test" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Compute GLM for visual test<a class="anchor" aria-label="anchor" href="#compute-glm-for-visual-test"><i class="fas fa-link"></i></a>
+</h2>
+<div id="define-the-minimum-and-maximum-effect-size" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Define the minimum and maximum effect size<a class="anchor" aria-label="anchor" href="#define-the-minimum-and-maximum-effect-size"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">min_es</span> <span class="op">&lt;-</span> <span class="va">vi_survey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">null_lineup</span>, </span>
+<span>         <span class="op">!</span><span class="va">attention_check</span>,</span>
+<span>         <span class="va">x_dist</span> <span class="op">==</span> <span class="st">"uniform"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">effect_size</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">max_es</span> <span class="op">&lt;-</span> <span class="va">vi_survey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">null_lineup</span>, </span>
+<span>         <span class="op">!</span><span class="va">attention_check</span>,</span>
+<span>         <span class="va">x_dist</span> <span class="op">==</span> <span class="st">"uniform"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">effect_size</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">min_es</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">max_es</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -1.450875  6.132414</span></span></code></pre></div>
+</div>
+<div id="fit-the-model" class="section level3" number="1.3.2">
+<h3>
+<span class="header-section-number">1.3.2</span> Fit the model<a class="anchor" aria-label="anchor" href="#fit-the-model"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">visual_mod</span> <span class="op">&lt;-</span> <span class="va">visual_test_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>offset0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>reject <span class="op">=</span> <span class="va">p_value</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  </span>
+<span>  <span class="co"># Slope-only model</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">reject</span> <span class="op">~</span> <span class="va">effect_size</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>      family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      data <span class="op">=</span> <span class="va">.</span>,</span>
+<span>      offset <span class="op">=</span> <span class="va">offset0</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">visual_mod</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; glm(formula = reject ~ effect_size - 1, family = binomial(), </span></span>
+<span><span class="co">#&gt;     data = ., offset = offset0)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Deviance Residuals: </span></span>
+<span><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span><span class="co">#&gt; -3.0104  -0.4070  -0.3307   0.1368   2.2719  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span><span class="co">#&gt; effect_size 0.098306   0.007402   13.28   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  </span></span>
+<span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Null deviance: 741.18  on 279  degrees of freedom</span></span>
+<span><span class="co">#&gt; Residual deviance: 195.65  on 278  degrees of freedom</span></span>
+<span><span class="co">#&gt; AIC: 197.65</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Fisher Scoring iterations: 7</span></span></code></pre></div>
+</div>
+<div id="make-prediction-for-the-visual-model" class="section level3" number="1.3.3">
+<h3>
+<span class="header-section-number">1.3.3</span> Make prediction for the visual model<a class="anchor" aria-label="anchor" href="#make-prediction-for-the-visual-model"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">visual_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">min_es</span><span class="op">)</span>, </span>
+<span>                                                <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">max_es</span><span class="op">)</span>, </span>
+<span>                                                <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">visual_mod</span>, </span>
+<span>                         type <span class="op">=</span> <span class="st">"response"</span>,</span>
+<span>                         newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="va">effect_size</span>,</span>
+<span>                                              offset0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>log_effect_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">effect_size</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">visual_pred</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   effect_size      power log_effect_size</span></span>
+<span><span class="co">#&gt; 1   0.2343650 0.05110579      -1.4508755</span></span>
+<span><span class="co">#&gt; 2   0.2590134 0.05122343      -1.3508755</span></span>
+<span><span class="co">#&gt; 3   0.2862541 0.05135373      -1.2508755</span></span>
+<span><span class="co">#&gt; 4   0.3163597 0.05149810      -1.1508755</span></span>
+<span><span class="co">#&gt; 5   0.3496315 0.05165810      -1.0508755</span></span>
+<span><span class="co">#&gt; 6   0.3864026 0.05183548      -0.9508755</span></span></code></pre></div>
+</div>
+<div id="make-bootstrap-prediction-for-the-visual-model" class="section level3" number="1.3.4">
+<h3>
+<span class="header-section-number">1.3.4</span> Make bootstrap prediction for the visual model<a class="anchor" aria-label="anchor" href="#make-bootstrap-prediction-for-the-visual-model"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">visual_boot_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="kw">function</span><span class="op">(</span><span class="va">boot_id</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">boot_mod</span> <span class="op">&lt;-</span> <span class="va">visual_test_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>offset0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>reject <span class="op">=</span> <span class="va">p_value</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span><span class="va">visual_mod</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">min_es</span><span class="op">)</span>, </span>
+<span>                                   <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">max_es</span><span class="op">)</span>, </span>
+<span>                                   <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">boot_mod</span>, </span>
+<span>                         type <span class="op">=</span> <span class="st">"response"</span>,</span>
+<span>                         newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="va">effect_size</span>,</span>
+<span>                                              offset0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>log_effect_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">effect_size</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>boot_id <span class="op">=</span> <span class="va">boot_id</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="compute-glm-for-conventional-tests" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Compute GLM for conventional tests<a class="anchor" aria-label="anchor" href="#compute-glm-for-conventional-tests"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">conv_pred</span> <span class="op">&lt;-</span> <span class="va">conv_test_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">RESET3_p_value</span>, <span class="op">-</span><span class="op">(</span><span class="va">RESET5_p_value</span><span class="op">:</span><span class="va">RESET10_p_value</span><span class="op">)</span>, <span class="op">-</span><span class="va">F_p_value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>RESET_p_value <span class="op">=</span> <span class="va">RESET4_p_value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">RESET_p_value</span><span class="op">:</span><span class="va">SW_p_value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"_p_value"</span>, <span class="st">" test"</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>reject <span class="op">=</span> <span class="va">value</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">effect_size</span>, <span class="va">name</span>, <span class="va">reject</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>offset0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">effect_size</span>, <span class="va">offset0</span>, <span class="va">reject</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mod <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">dat</span>, </span>
+<span>                   <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">reject</span> <span class="op">~</span> <span class="va">effect_size</span> <span class="op">-</span> <span class="fl">1</span>, </span>
+<span>                        family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>                        data <span class="op">=</span> <span class="va">.x</span>,</span>
+<span>                        offset <span class="op">=</span> <span class="va">offset0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>power <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">mod</span>, <span class="kw">function</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>effect_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">min_es</span><span class="op">)</span>,</span>
+<span>                                     <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">max_es</span><span class="op">)</span>,</span>
+<span>                                     <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>               offset0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod</span>, type <span class="op">=</span> <span class="st">"response"</span>, newdata <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">dat</span>, <span class="op">-</span><span class="va">mod</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">power</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">offset0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>log_effect_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">effect_size</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="draw-the-plot" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Draw the plot<a class="anchor" aria-label="anchor" href="#draw-the-plot"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">visual_test_dat</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">effect_size</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">p_value</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">conv_pred</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">log_effect_size</span>, <span class="va">power</span>, col <span class="op">=</span> <span class="va">name</span><span class="op">)</span>,</span>
+<span>            size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">visual_boot_pred</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">log_effect_size</span>, <span class="va">power</span>, col <span class="op">=</span> <span class="st">"visual test"</span>, group <span class="op">=</span> <span class="va">boot_id</span><span class="op">)</span>,</span>
+<span>            size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>            alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">visual_pred</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">log_effect_size</span>, <span class="va">power</span>, col <span class="op">=</span> <span class="st">"visual test"</span><span class="op">)</span>, </span>
+<span>            size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu">rcartocolor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rcartocolor/man/carto_pal.html">carto_pal</a></span><span class="op">(</span><span class="fl">4</span>, <span class="st">"Vivid"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">log</span><span class="op">[</span><span class="va">e</span><span class="op">]</span> <span class="op">(</span><span class="va">Effect_size</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Power"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">""</span>, size <span class="op">=</span> <span class="st">"# lineups"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-entire-set_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Welcome</a></div>
+<div class="next"><a href="conventional-combine-tests.html"><span class="header-section-number">2</span> Conventional combine tests</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations"><span class="header-section-number">1</span> Check the performance of conventional tests and visual tests in detecting model violations</a></li>
+<li><a class="nav-link" href="#load-libraries"><span class="header-section-number">1.1</span> Load libraries</a></li>
+<li>
+<a class="nav-link" href="#load-data"><span class="header-section-number">1.2</span> Load data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#visual-test-data"><span class="header-section-number">1.2.1</span> Visual test data</a></li>
+<li><a class="nav-link" href="#conventional-test-data"><span class="header-section-number">1.2.2</span> Conventional test data</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#compute-glm-for-visual-test"><span class="header-section-number">1.3</span> Compute GLM for visual test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#define-the-minimum-and-maximum-effect-size"><span class="header-section-number">1.3.1</span> Define the minimum and maximum effect size</a></li>
+<li><a class="nav-link" href="#fit-the-model"><span class="header-section-number">1.3.2</span> Fit the model</a></li>
+<li><a class="nav-link" href="#make-prediction-for-the-visual-model"><span class="header-section-number">1.3.3</span> Make prediction for the visual model</a></li>
+<li><a class="nav-link" href="#make-bootstrap-prediction-for-the-visual-model"><span class="header-section-number">1.3.4</span> Make bootstrap prediction for the visual model</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#compute-glm-for-conventional-tests"><span class="header-section-number">1.4</span> Compute GLM for conventional tests</a></li>
+<li><a class="nav-link" href="#draw-the-plot"><span class="header-section-number">1.5</span> Draw the plot</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/TengMCing/analysis_buffer/blob/master/01-entire-set.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/TengMCing/analysis_buffer/edit/master/01-entire-set.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
