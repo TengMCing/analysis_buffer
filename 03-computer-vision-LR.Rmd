@@ -58,13 +58,13 @@ Grouped by different kinds of inputs and outputs, we can design the system diffe
 
 If we consider the input to be a single residual plot, it will be better if the aesthetic of the plot is standardised. Users generally have access to the raw residuals and the fitted values. We may provide a function to help them to produce such a residual plot.
 
-Input: Single standard residual plot
-Output: The probability of the plot begin rejected by a visual test.
+- Input: Single standard residual plot
+- Output: The probability of the plot begin rejected by a visual test.
 
-Input: Single standard residual plot
-Output: The probability of the plot exhibiting any residual departures.
+- Input: Single standard residual plot
+- Output: The probability of the plot exhibiting any residual departures.
 
-Raw-Input: Residuals and fitted values
+- Raw-Input: Residuals and fitted values
 Input: Single standard residual plot
 Output: The probability of the plot exhibiting any residual departures.
 

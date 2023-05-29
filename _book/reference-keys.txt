@@ -33,3 +33,11 @@ inputs-and-outpus
 data
 architectures
 concerns
+plan
+summary-of-the-current-progress
+plan-for-the-next-step
+define-the-objectives
+data-prepration
+model-training
+testing-and-evaluation
+iterative-refinement
