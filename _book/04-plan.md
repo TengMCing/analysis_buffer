@@ -42,14 +42,13 @@ Then, advanced models such as GAN can be considered to follow the lineup protoco
 
 Conduct rigorous testing by applying the trained model to a range of real-world scenarios and comparing its performance to human observations. Measure the accuracy, precision, recall, and other relevant metrics to assess the model's effectiveness.
 
-
+We need to come out with a standard metrics for evaluating the model performance.
 
 ### Iterative refinement
 
 Based on the evaluation results, identify areas where the model may fall short and refine the training process accordingly. Continuously iterate on the model architecture, hyperparameters, and training techniques to improve performance.
 
 ## Extension
-
 
 - Try different type of residual diagnostic plots.
 - Try different aesthetics styles.

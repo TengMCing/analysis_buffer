@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 HPC (M3) Documentation | Analysis Buffer</title>
 <meta name="author" content="Patrick Li">
-<meta name="description" content="This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.  6.1 Types of instancs   6.2 Connection Methods   6.3 Folder Structure   6.4...">
+<meta name="description" content="This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.  6.1 Help and Support Encounter network issues? Check the system stauts on...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
 <meta property="og:title" content="Chapter 6 HPC (M3) Documentation | Analysis Buffer">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://someurl.netlify.app/hpc-m3-documentation.html">
-<meta property="og:description" content="This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.  6.1 Types of instancs   6.2 Connection Methods   6.3 Folder Structure   6.4...">
+<meta property="og:description" content="This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.  6.1 Help and Support Encounter network issues? Check the system stauts on...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 HPC (M3) Documentation | Analysis Buffer">
-<meta name="twitter:description" content="This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.  6.1 Types of instancs   6.2 Connection Methods   6.3 Folder Structure   6.4...">
+<meta name="twitter:description" content="This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.  6.1 Help and Support Encounter network issues? Check the system stauts on...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -86,24 +86,160 @@
 <span class="header-section-number">6</span> HPC (M3) Documentation<a class="anchor" aria-label="anchor" href="#hpc-m3-documentation"><i class="fas fa-link"></i></a>
 </h1>
 <p>This is a chapter for documenting the use of HPC in terms of folder structure, model setup, tasks submission, etc.</p>
-<div id="types-of-instancs" class="section level2" number="6.1">
+<div id="help-and-support" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">6.1</span> Types of instancs<a class="anchor" aria-label="anchor" href="#types-of-instancs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Help and Support<a class="anchor" aria-label="anchor" href="#help-and-support"><i class="fas fa-link"></i></a>
 </h2>
+<p>Encounter network issues? Check the system stauts on <a href="https://monasheresearch.statuspage.io/" class="uri">https://monasheresearch.statuspage.io/</a>.</p>
+<p>Send email to <a href="mailto:help@massive.org.au" class="email">help@massive.org.au</a> with</p>
+<ul>
+<li>Commands</li>
+<li>Simple reproducible example</li>
+<li>Full path to <code>slurm</code> script and input files</li>
+<li>Software used</li>
+<li>Error messages</li>
+</ul>
 </div>
-<div id="connection-methods" class="section level2" number="6.2">
+<div id="nodes-for-job-submission" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> Connection Methods<a class="anchor" aria-label="anchor" href="#connection-methods"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Nodes for Job Submission<a class="anchor" aria-label="anchor" href="#nodes-for-job-submission"><i class="fas fa-link"></i></a>
 </h2>
+<ul>
+<li>K80</li>
+<li>T4</li>
+<li>P100</li>
+<li>V100</li>
+<li>A40</li>
+<li>DGX1</li>
+</ul>
 </div>
-<div id="folder-structure" class="section level2" number="6.3">
+<div id="remote-desktop" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">6.3</span> Folder Structure<a class="anchor" aria-label="anchor" href="#folder-structure"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Remote Desktop<a class="anchor" aria-label="anchor" href="#remote-desktop"><i class="fas fa-link"></i></a>
 </h2>
+<ul>
+<li>P4: 60</li>
+<li>T4: 32</li>
+<li>Dual T4: 16</li>
+<li>K80: 26</li>
+<li>A40: 16</li>
+</ul>
 </div>
-<div id="software-setup-for-reproducibility" class="section level2" number="6.4">
+<div id="connection-methods" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> Software Setup for Reproducibility<a class="anchor" aria-label="anchor" href="#software-setup-for-reproducibility"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Connection Methods<a class="anchor" aria-label="anchor" href="#connection-methods"><i class="fas fa-link"></i></a>
+</h2>
+<div id="ssh" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">6.4.1</span> ssh<a class="anchor" aria-label="anchor" href="#ssh"><i class="fas fa-link"></i></a>
+</h3>
+<pre><code>ssh -l username m3.massive.org.au</code></pre>
+</div>
+<div id="x11-port-forwarding" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">6.4.2</span> X11 port forwarding<a class="anchor" aria-label="anchor" href="#x11-port-forwarding"><i class="fas fa-link"></i></a>
+</h3>
+<p>Trusted X11 forwarding</p>
+<pre><code>ssh -l username m3.massive.org.au -Y</code></pre>
+<p>Enables X11 forwarding</p>
+<pre><code>ssh -l username m3.massive.org.au -X</code></pre>
+</div>
+</div>
+<div id="remote-desktop-1" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Remote Desktop<a class="anchor" aria-label="anchor" href="#remote-desktop-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Strudel Web (<a href="http://desktop.massive.org.au/" class="uri">http://desktop.massive.org.au/</a>)</li>
+<li>Strudel2 (<a href="https://beta.desktop.cvl.org.au/login" class="uri">https://beta.desktop.cvl.org.au/login</a>)</li>
+</ul>
+<p>Great for setting up the environment interactively.</p>
+<div id="change-the-size-of-the-desktop" class="section level3" number="6.5.1">
+<h3>
+<span class="header-section-number">6.5.1</span> Change the Size of the Desktop<a class="anchor" aria-label="anchor" href="#change-the-size-of-the-desktop"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Use <code>xrandr -s "1920 * 1080"</code> in the desktop terminal.</li>
+<li>Use TurboVNC (<code>ctl-cmd-shift-o</code>?), under “Connection Option”</li>
+</ul>
+</div>
+<div id="connection-speed" class="section level3" number="6.5.2">
+<h3>
+<span class="header-section-number">6.5.2</span> Connection Speed<a class="anchor" aria-label="anchor" href="#connection-speed"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Use “WAN” options under “Encoding method” of TurboVNC</li>
+</ul>
+</div>
+<div id="others" class="section level3" number="6.5.3">
+<h3>
+<span class="header-section-number">6.5.3</span> Others<a class="anchor" aria-label="anchor" href="#others"><i class="fas fa-link"></i></a>
+</h3>
+<p>The remote machine may have copy and paste keys different from your local machine.</p>
+</div>
+<div id="jupyter-lab" class="section level3" number="6.5.4">
+<h3>
+<span class="header-section-number">6.5.4</span> Jupyter Lab<a class="anchor" aria-label="anchor" href="#jupyter-lab"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Disable pop-up blocker</li>
+<li>Install user site package <code>pip install --user pkg_name</code>
+</li>
+<li>Or <code>!pip install --user pkg_name</code>
+</li>
+<li>Or create a conda env/venv</li>
+<li><code>pip list installed</code></li>
+</ul>
+</div>
+<div id="login-node-vs.-compute-node" class="section level3" number="6.5.5">
+<h3>
+<span class="header-section-number">6.5.5</span> Login Node VS. Compute Node<a class="anchor" aria-label="anchor" href="#login-node-vs.-compute-node"><i class="fas fa-link"></i></a>
+</h3>
+<p>Login node is for editing scripts and submitting jobs.</p>
+</div>
+<div id="use-miniconda" class="section level3" number="6.5.6">
+<h3>
+<span class="header-section-number">6.5.6</span> Use Miniconda<a class="anchor" aria-label="anchor" href="#use-miniconda"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://docs.massive.org.au/M3/software/pythonandconda/python-miniconda.html#python-miniconda" class="uri">https://docs.massive.org.au/M3/software/pythonandconda/python-miniconda.html#python-miniconda</a></p>
+<pre><code>module load conda-install
+
+# Install miniconda to default space (/scratch/nq46/username/miniconda)
+conda-install
+
+# Activate env
+source /scratch/nq46/username/miniconda/bin/activate
+
+# Create env (Note that there is an environment called jupyterlab that can be used)
+conda create --name myenv -f myenv.yml
+
+conda activate myenv</code></pre>
+<pre><code>conda install pkg_name=ver_num
+
+conda update pkg_name=ver_num</code></pre>
+<div id="add-new-env-to-jupyterlab" class="section level4" number="6.5.6.1">
+<h4>
+<span class="header-section-number">6.5.6.1</span> Add New Env to JupyterLab<a class="anchor" aria-label="anchor" href="#add-new-env-to-jupyterlab"><i class="fas fa-link"></i></a>
+</h4>
+<pre><code>add-strudel2-conda /path/to/miniconda/ newJupyterEnv</code></pre>
+</div>
+</div>
+<div id="vs-code-connection" class="section level3" number="6.5.7">
+<h3>
+<span class="header-section-number">6.5.7</span> VS Code Connection<a class="anchor" aria-label="anchor" href="#vs-code-connection"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://docs.massive.org.au/M3/connecting/strudel2/connecting-to-vscode.html" class="uri">https://docs.massive.org.au/M3/connecting/strudel2/connecting-to-vscode.html</a></p>
+</div>
+</div>
+<div id="useful-commands" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Useful commands<a class="anchor" aria-label="anchor" href="#useful-commands"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>user_info</code></p>
+</div>
+<div id="file-systems" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> File systems<a class="anchor" aria-label="anchor" href="#file-systems"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
@@ -115,10 +251,28 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#hpc-m3-documentation"><span class="header-section-number">6</span> HPC (M3) Documentation</a></li>
-<li><a class="nav-link" href="#types-of-instancs"><span class="header-section-number">6.1</span> Types of instancs</a></li>
-<li><a class="nav-link" href="#connection-methods"><span class="header-section-number">6.2</span> Connection Methods</a></li>
-<li><a class="nav-link" href="#folder-structure"><span class="header-section-number">6.3</span> Folder Structure</a></li>
-<li><a class="nav-link" href="#software-setup-for-reproducibility"><span class="header-section-number">6.4</span> Software Setup for Reproducibility</a></li>
+<li><a class="nav-link" href="#help-and-support"><span class="header-section-number">6.1</span> Help and Support</a></li>
+<li><a class="nav-link" href="#nodes-for-job-submission"><span class="header-section-number">6.2</span> Nodes for Job Submission</a></li>
+<li><a class="nav-link" href="#remote-desktop"><span class="header-section-number">6.3</span> Remote Desktop</a></li>
+<li>
+<a class="nav-link" href="#connection-methods"><span class="header-section-number">6.4</span> Connection Methods</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ssh"><span class="header-section-number">6.4.1</span> ssh</a></li>
+<li><a class="nav-link" href="#x11-port-forwarding"><span class="header-section-number">6.4.2</span> X11 port forwarding</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#remote-desktop-1"><span class="header-section-number">6.5</span> Remote Desktop</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#change-the-size-of-the-desktop"><span class="header-section-number">6.5.1</span> Change the Size of the Desktop</a></li>
+<li><a class="nav-link" href="#connection-speed"><span class="header-section-number">6.5.2</span> Connection Speed</a></li>
+<li><a class="nav-link" href="#others"><span class="header-section-number">6.5.3</span> Others</a></li>
+<li><a class="nav-link" href="#jupyter-lab"><span class="header-section-number">6.5.4</span> Jupyter Lab</a></li>
+<li><a class="nav-link" href="#login-node-vs.-compute-node"><span class="header-section-number">6.5.5</span> Login Node VS. Compute Node</a></li>
+<li><a class="nav-link" href="#use-miniconda"><span class="header-section-number">6.5.6</span> Use Miniconda</a></li>
+<li><a class="nav-link" href="#vs-code-connection"><span class="header-section-number">6.5.7</span> VS Code Connection</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#useful-commands"><span class="header-section-number">6.6</span> Useful commands</a></li>
+<li><a class="nav-link" href="#file-systems"><span class="header-section-number">6.7</span> File systems</a></li>
 </ul>
 
       <div class="book-extra">
