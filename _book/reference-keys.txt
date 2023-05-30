@@ -41,3 +41,9 @@ data-prepration
 model-training
 testing-and-evaluation
 iterative-refinement
+extension
+hpc-m3-documentation
+types-of-instancs
+connection-methods
+folder-structure
+software-setup-for-reproducibility

@@ -72,6 +72,7 @@
 <li><a class="" href="combined-tests-reset-bp-and-sw.html"><span class="header-section-number">3</span> Combined tests (RESET, BP and SW)</a></li>
 <li><a class="" href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
 <li><a class="active" href="plan.html"><span class="header-section-number">5</span> Plan</a></li>
+<li><a class="" href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -89,8 +90,7 @@
 <span class="header-section-number">5.1</span> Summary of the current progress<a class="anchor" aria-label="anchor" href="#summary-of-the-current-progress"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have identified several potential methods for constructing the system. However, there are numerous crucial questions that currently remain unanswered. For instance, we are uncertain whether the system can effectively detect residual departures in a manner similar to humans. To address this, it is necessary to proceed with training the computer vision model and conduct experiments to test the hypothesis.</p>
-<p>It is essential to emphasize the importance of accurate training and extensive testing to ensure the reliability and effectiveness of the system. By subjecting the model to a wide range of scenarios and collecting comprehensive data, we can gain valuable insights into its capabilities and limitations.</p>
-<p>Additionally, ongoing evaluation and refinement of the computer vision model will be necessary to address any potential shortcomings.</p>
+<p>It is essential to emphasize the importance of accurate training and extensive testing to ensure the reliability and effectiveness of the system. By preparing a wide range of scenarios and collecting comprehensive data, we can gain valuable insights into its capabilities and limitations. Additionally, ongoing evaluation and refinement of the computer vision model will be necessary to address any potential shortcomings.</p>
 </div>
 <div id="plan-for-the-next-step" class="section level2" number="5.2">
 <h2>
@@ -101,19 +101,31 @@
 <h3>
 <span class="header-section-number">5.2.1</span> Define the Objectives<a class="anchor" aria-label="anchor" href="#define-the-objectives"><i class="fas fa-link"></i></a>
 </h3>
-<p>Clearly establish the goals and objectives of the system, including the specific requirements for detecting residual departures.</p>
+<p>Clearly establish the goals and objectives of the system, including the specific requirements for detecting residual departures. This can be found in the previous chapter.</p>
 </div>
 <div id="data-prepration" class="section level3" number="5.2.2">
 <h3>
 <span class="header-section-number">5.2.2</span> Data Prepration<a class="anchor" aria-label="anchor" href="#data-prepration"><i class="fas fa-link"></i></a>
 </h3>
-<p>Prepare a diverse and representative dataset that encompasses various types of departures and their corresponding human observations.</p>
+<p>Prepare a diverse and representative dataset that encompasses various types of departures and their corresponding human observations. Types of departures we would like to consider are:
+- Non-linearity
+- Hermite polynomials
+- Heteroskedasticity
+- Variance of error as quadratic function of regressor
+- Non-normality
+- Non-normal error
+- Autocorrelation
+- AR1 included as predictor</p>
+<p>This should cover most of the common model violations of classical normal linear regression model. We have a particular focus on residual vs. fitted values plot, but autocorrelation generally can not be detected by this type of plot.</p>
+<p>We would like to prepare at least 10,000 images per type of violation.</p>
 </div>
 <div id="model-training" class="section level3" number="5.2.3">
 <h3>
 <span class="header-section-number">5.2.3</span> Model Training<a class="anchor" aria-label="anchor" href="#model-training"><i class="fas fa-link"></i></a>
 </h3>
 <p>Develop and implement a training pipeline that incorporates state-of-the-art computer vision techniques. Train the model using the collected dataset, ensuring a balance between performance and computational efficiency.</p>
+<p>We should consider the basic model first, which is a traditional CNN classifier for deciding whether the residual plot is a null plot. Additionally, we need to train a multiclass classifier for providing more useful information on fixing the model violation.</p>
+<p>Then, advanced models such as GAN can be considered to follow the lineup protocol more closely. Both the traditional classifier and the GAN models can be discussed in the paper. I am very curious about their performance.</p>
 </div>
 <div id="testing-and-evaluation" class="section level3" number="5.2.4">
 <h3>
@@ -126,13 +138,21 @@
 <span class="header-section-number">5.2.5</span> Iterative refinement<a class="anchor" aria-label="anchor" href="#iterative-refinement"><i class="fas fa-link"></i></a>
 </h3>
 <p>Based on the evaluation results, identify areas where the model may fall short and refine the training process accordingly. Continuously iterate on the model architecture, hyperparameters, and training techniques to improve performance.</p>
-
 </div>
+</div>
+<div id="extension" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Extension<a class="anchor" aria-label="anchor" href="#extension"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Try different type of residual diagnostic plots.</li>
+<li>Try different aesthetics styles.</li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -147,6 +167,7 @@
 <li><a class="nav-link" href="#iterative-refinement"><span class="header-section-number">5.2.5</span> Iterative refinement</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#extension"><span class="header-section-number">5.3</span> Extension</a></li>
 </ul>
 
       <div class="book-extra">
@@ -164,7 +185,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-30.</p>
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

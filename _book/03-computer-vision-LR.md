@@ -66,37 +66,37 @@ If we consider the input to be a single residual plot, it will be better if the 
 - Output: The probability of the plot exhibiting any residual departures.
 
 - Raw-Input: Residuals and fitted values
-Input: Single standard residual plot
-Output: The probability of the plot exhibiting any residual departures.
+- Input: Single standard residual plot
+- Output: The probability of the plot exhibiting any residual departures.
 
 As mentioned above, the system may also provide the type of model violations. This can usually be done by a multiclass classifier.
 
-Raw-Input: Residuals and fitted values
-Input: Single standard residual plot
-Output: The probability of the plot exhibiting each departure (multiclass).
+- Raw-Input: Residuals and fitted values
+- Input: Single standard residual plot
+- Output: The probability of the plot exhibiting each departure (multiclass).
 
 Additionally, raw numerical data may be used as additional information to help make accurate predictions.
 
-Raw-Input: Residuals and fitted values
-Input: Standard residual plot & residuals
-Output: The probability of the plot exhibiting any residual departures.
+- Raw-Input: Residuals and fitted values
+- Input: Standard residual plot & residuals
+- Output: The probability of the plot exhibiting any residual departures.
 
-Raw-Input: Residuals and fitted values
-Input: Standard residual plot & residuals
-Output: The probability of the plot exhibiting each departure (multiclass).
+- Raw-Input: Residuals and fitted values
+- Input: Standard residual plot & residuals
+- Output: The probability of the plot exhibiting each departure (multiclass).
 
 If we would like to follow the lineup protocol, then the input of the system would be a lineup of residual plots. We can ask the system to perform the same task as humans, which is to select the most different plot(s).
 
-Input: Multiple residual plots (from a lineup)
-Output: Most different plot.
+- Input: Multiple residual plots (from a lineup)
+- Output: Most different plot.
 
-Input: Multiple residual plots (from a lineup)
-Output: Most different plots.
+- Input: Multiple residual plots (from a lineup)
+- Output: Most different plots.
 
 Further, unlike humans, computer vision models can possibly produce a ranking of residual plots from a lineup. With the ranking, a novel inference method can be developed.
 
-Input: Multiple residual plots (from a lineup)
-Output: Ranking (most different plot)
+- Input: Multiple residual plots (from a lineup)
+- Output: Ranking (most different plot)
 
 
 ## Data

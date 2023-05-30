@@ -72,6 +72,7 @@
 <li><a class="" href="combined-tests-reset-bp-and-sw.html"><span class="header-section-number">3</span> Combined tests (RESET, BP and SW)</a></li>
 <li><a class="active" href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
 <li><a class="" href="plan.html"><span class="header-section-number">5</span> Plan</a></li>
+<li><a class="" href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -116,29 +117,37 @@
 <li><p>Output: The probability of the plot begin rejected by a visual test.</p></li>
 <li><p>Input: Single standard residual plot</p></li>
 <li><p>Output: The probability of the plot exhibiting any residual departures.</p></li>
-<li><p>Raw-Input: Residuals and fitted values
-Input: Single standard residual plot
-Output: The probability of the plot exhibiting any residual departures.</p></li>
+<li><p>Raw-Input: Residuals and fitted values</p></li>
+<li><p>Input: Single standard residual plot</p></li>
+<li><p>Output: The probability of the plot exhibiting any residual departures.</p></li>
 </ul>
 <p>As mentioned above, the system may also provide the type of model violations. This can usually be done by a multiclass classifier.</p>
-<p>Raw-Input: Residuals and fitted values
-Input: Single standard residual plot
-Output: The probability of the plot exhibiting each departure (multiclass).</p>
+<ul>
+<li>Raw-Input: Residuals and fitted values</li>
+<li>Input: Single standard residual plot</li>
+<li>Output: The probability of the plot exhibiting each departure (multiclass).</li>
+</ul>
 <p>Additionally, raw numerical data may be used as additional information to help make accurate predictions.</p>
-<p>Raw-Input: Residuals and fitted values
-Input: Standard residual plot &amp; residuals
-Output: The probability of the plot exhibiting any residual departures.</p>
-<p>Raw-Input: Residuals and fitted values
-Input: Standard residual plot &amp; residuals
-Output: The probability of the plot exhibiting each departure (multiclass).</p>
+<ul>
+<li><p>Raw-Input: Residuals and fitted values</p></li>
+<li><p>Input: Standard residual plot &amp; residuals</p></li>
+<li><p>Output: The probability of the plot exhibiting any residual departures.</p></li>
+<li><p>Raw-Input: Residuals and fitted values</p></li>
+<li><p>Input: Standard residual plot &amp; residuals</p></li>
+<li><p>Output: The probability of the plot exhibiting each departure (multiclass).</p></li>
+</ul>
 <p>If we would like to follow the lineup protocol, then the input of the system would be a lineup of residual plots. We can ask the system to perform the same task as humans, which is to select the most different plot(s).</p>
-<p>Input: Multiple residual plots (from a lineup)
-Output: Most different plot.</p>
-<p>Input: Multiple residual plots (from a lineup)
-Output: Most different plots.</p>
+<ul>
+<li><p>Input: Multiple residual plots (from a lineup)</p></li>
+<li><p>Output: Most different plot.</p></li>
+<li><p>Input: Multiple residual plots (from a lineup)</p></li>
+<li><p>Output: Most different plots.</p></li>
+</ul>
 <p>Further, unlike humans, computer vision models can possibly produce a ranking of residual plots from a lineup. With the ranking, a novel inference method can be developed.</p>
-<p>Input: Multiple residual plots (from a lineup)
-Output: Ranking (most different plot)</p>
+<ul>
+<li>Input: Multiple residual plots (from a lineup)</li>
+<li>Output: Ranking (most different plot)</li>
+</ul>
 </div>
 <div id="data" class="section level2" number="4.4">
 <h2>
@@ -223,7 +232,7 @@ Output: Ranking (most different plot)</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-30.</p>
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
