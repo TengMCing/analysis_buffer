@@ -17,6 +17,7 @@ Clearly establish the goals and objectives of the system, including the specific
 ### Data Prepration
 
 Prepare a diverse and representative dataset that encompasses various types of departures and their corresponding human observations. Types of departures we would like to consider are: 
+
 - Non-linearity
   - Hermite polynomials
 - Heteroskedasticity

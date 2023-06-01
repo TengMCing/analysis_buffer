@@ -126,3 +126,83 @@ https://docs.massive.org.au/M3/connecting/strudel2/connecting-to-vscode.html
 
 ## File systems
 
+Two symbolic links:
+- `~/project_name`: backed up daily
+- `~/project_name_scratch`: not backed up
+
+### Space 
+
+- Home (10GB)
+  - Configuration files
+  - Personal settings
+- Project (50GB? 500GB?)
+  - Input data
+  - Job scripts
+  - Output data
+  - Create a subdirectory for myself (e.g. "~/project/patrickli")
+- Scratch (3TB)
+  - Intermediate data
+  - Data that is actively being processed
+  
+## FileZilla
+
+1. Site-Manager
+2. New Site (SFTP)
+  - Host: m3-dtn.massive.org.au
+  - Logon Type: Ask for Password
+  - User: my_username
+3. Enter password
+
+## Modules
+
+```
+module avail mod_name
+
+# To use a module
+module load mod_name
+
+# Loaded module
+module list
+
+# Learn more
+module show mod_name
+
+module unload mod_name
+
+# Kill all loaded modules
+module purge
+```
+
+## Jobs
+
+https://slurm.schedmd.com/
+
+`show_cluster`
+
+### Slurm Accounts
+
+`sacctmgr show user $USER format=User,DefaultAccount`
+
+### Job Submission
+
+https://docs.massive.org.au/M3/slurm/simple-batch-jobs.html
+
+## Workflow
+
+This section records the setup of the remote machine
+
+```
+# Create personal folder and clone the github repo
+cd sk54
+mkdir patrickli
+git clone https://github.com/TengMCing/automatic_visual_inference.git
+
+# Install tensorflow and init conda
+cd ~
+module load conda-install
+conda-install
+sk54_scartch/wlii0039/miniconda/bin/conda init
+conda create --name tf2-gpu
+conda install python=3.11 jupyterlab
+pip install tensorflow
+```

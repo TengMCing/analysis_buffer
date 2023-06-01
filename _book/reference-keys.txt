@@ -60,3 +60,10 @@ add-new-env-to-jupyterlab
 vs-code-connection
 useful-commands
 file-systems
+space
+filezilla
+modules
+jobs
+slurm-accounts
+job-submission
+workflow

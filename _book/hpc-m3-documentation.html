@@ -241,6 +241,111 @@ conda update pkg_name=ver_num</code></pre>
 <h2>
 <span class="header-section-number">6.7</span> File systems<a class="anchor" aria-label="anchor" href="#file-systems"><i class="fas fa-link"></i></a>
 </h2>
+<p>Two symbolic links:
+- <code>~/project_name</code>: backed up daily
+- <code>~/project_name_scratch</code>: not backed up</p>
+<div id="space" class="section level3" number="6.7.1">
+<h3>
+<span class="header-section-number">6.7.1</span> Space<a class="anchor" aria-label="anchor" href="#space"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Home (10GB)
+<ul>
+<li>Configuration files</li>
+<li>Personal settings</li>
+</ul>
+</li>
+<li>Project (50GB? 500GB?)
+<ul>
+<li>Input data</li>
+<li>Job scripts</li>
+<li>Output data</li>
+<li>Create a subdirectory for myself (e.g. “~/project/patrickli”)</li>
+</ul>
+</li>
+<li>Scratch (3TB)
+<ul>
+<li>Intermediate data</li>
+<li>Data that is actively being processed</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="filezilla" class="section level2" number="6.8">
+<h2>
+<span class="header-section-number">6.8</span> FileZilla<a class="anchor" aria-label="anchor" href="#filezilla"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Site-Manager</li>
+<li>New Site (SFTP)</li>
+</ol>
+<ul>
+<li>Host: m3-dtn.massive.org.au</li>
+<li>Logon Type: Ask for Password</li>
+<li>User: my_username</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Enter password</li>
+</ol>
+</div>
+<div id="modules" class="section level2" number="6.9">
+<h2>
+<span class="header-section-number">6.9</span> Modules<a class="anchor" aria-label="anchor" href="#modules"><i class="fas fa-link"></i></a>
+</h2>
+<pre><code>module avail mod_name
+
+# To use a module
+module load mod_name
+
+# Loaded module
+module list
+
+# Learn more
+module show mod_name
+
+module unload mod_name
+
+# Kill all loaded modules
+module purge</code></pre>
+</div>
+<div id="jobs" class="section level2" number="6.10">
+<h2>
+<span class="header-section-number">6.10</span> Jobs<a class="anchor" aria-label="anchor" href="#jobs"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://slurm.schedmd.com/" class="uri">https://slurm.schedmd.com/</a></p>
+<p><code>show_cluster</code></p>
+<div id="slurm-accounts" class="section level3" number="6.10.1">
+<h3>
+<span class="header-section-number">6.10.1</span> Slurm Accounts<a class="anchor" aria-label="anchor" href="#slurm-accounts"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>sacctmgr show user $USER format=User,DefaultAccount</code></p>
+</div>
+<div id="job-submission" class="section level3" number="6.10.2">
+<h3>
+<span class="header-section-number">6.10.2</span> Job Submission<a class="anchor" aria-label="anchor" href="#job-submission"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://docs.massive.org.au/M3/slurm/simple-batch-jobs.html" class="uri">https://docs.massive.org.au/M3/slurm/simple-batch-jobs.html</a></p>
+</div>
+</div>
+<div id="workflow" class="section level2" number="6.11">
+<h2>
+<span class="header-section-number">6.11</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
+</h2>
+<p>This section records the setup of the remote machine</p>
+<pre><code># Create personal folder and clone the github repo
+cd sk54
+mkdir patrickli
+git clone https://github.com/TengMCing/automatic_visual_inference.git
+
+# Install tensorflow and init conda
+cd ~
+module load conda-install
+conda-install
+sk54_scartch/wlii0039/miniconda/bin/conda init
+conda create --name tf2-gpu
+conda install python=3.11 jupyterlab
+pip install tensorflow</code></pre>
 
 </div>
 </div>
@@ -272,7 +377,18 @@ conda update pkg_name=ver_num</code></pre>
 </ul>
 </li>
 <li><a class="nav-link" href="#useful-commands"><span class="header-section-number">6.6</span> Useful commands</a></li>
-<li><a class="nav-link" href="#file-systems"><span class="header-section-number">6.7</span> File systems</a></li>
+<li>
+<a class="nav-link" href="#file-systems"><span class="header-section-number">6.7</span> File systems</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#space"><span class="header-section-number">6.7.1</span> Space</a></li></ul>
+</li>
+<li><a class="nav-link" href="#filezilla"><span class="header-section-number">6.8</span> FileZilla</a></li>
+<li><a class="nav-link" href="#modules"><span class="header-section-number">6.9</span> Modules</a></li>
+<li>
+<a class="nav-link" href="#jobs"><span class="header-section-number">6.10</span> Jobs</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#slurm-accounts"><span class="header-section-number">6.10.1</span> Slurm Accounts</a></li>
+<li><a class="nav-link" href="#job-submission"><span class="header-section-number">6.10.2</span> Job Submission</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#workflow"><span class="header-section-number">6.11</span> Workflow</a></li>
 </ul>
 
       <div class="book-extra">
@@ -290,7 +406,7 @@ conda update pkg_name=ver_num</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-05-31.</p>
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-06-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
