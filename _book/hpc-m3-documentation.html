@@ -342,10 +342,26 @@ git clone https://github.com/TengMCing/automatic_visual_inference.git
 cd ~
 module load conda-install
 conda-install
-sk54_scartch/wlii0039/miniconda/bin/conda init
+sk54_scratch/wlii0039/miniconda/bin/conda init
 conda create --name tf2-gpu
 conda install python=3.11 jupyterlab
-pip install tensorflow</code></pre>
+pip install tensorflow
+
+# Create a folder to install our own R packages
+cd sk54_scratch/wlii0039
+mkdir r_libs
+
+# Specify the library location such that `.libPaths()` will return the
+# correct library path
+cd ~
+echo "R_LIBS=~/sk54_scratch/wlii0039/r_libs" &gt; .Renviron
+
+# Install our R packages to `r_libs`
+module load R/4.0.5
+R</code></pre>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/bandicoot"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/visage"</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>
