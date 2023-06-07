@@ -66,4 +66,7 @@ modules
 jobs
 slurm-accounts
 job-submission
+hpc-status
 workflow
+experience
+status

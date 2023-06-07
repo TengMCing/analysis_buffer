@@ -73,6 +73,7 @@
 <li><a class="" href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
 <li><a class="" href="plan.html"><span class="header-section-number">5</span> Plan</a></li>
 <li><a class="active" href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></li>
+<li><a class="" href="hpc-status.html"><span class="header-section-number">7</span> HPC status</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -151,7 +152,11 @@
 </h2>
 <ul>
 <li>Strudel Web (<a href="http://desktop.massive.org.au/" class="uri">http://desktop.massive.org.au/</a>)</li>
-<li>Strudel2 (<a href="https://beta.desktop.cvl.org.au/login" class="uri">https://beta.desktop.cvl.org.au/login</a>)</li>
+<li>Strudel2 (<a href="https://beta.desktop.cvl.org.au/login" class="uri">https://beta.desktop.cvl.org.au/login</a>)
+<ul>
+<li>Use P4 or single-T4. They both have single GPU, which is easier to be used.</li>
+</ul>
+</li>
 </ul>
 <p>Great for setting up the environment interactively.</p>
 <div id="change-the-size-of-the-desktop" class="section level3" number="6.5.1">
@@ -175,7 +180,8 @@
 <h3>
 <span class="header-section-number">6.5.3</span> Others<a class="anchor" aria-label="anchor" href="#others"><i class="fas fa-link"></i></a>
 </h3>
-<p>The remote machine may have copy and paste keys different from your local machine.</p>
+<p>The remote machine may have copy and paste keys different from your local machine.
+- You can not copy and paste with the Mac keyboard!</p>
 </div>
 <div id="jupyter-lab" class="section level3" number="6.5.4">
 <h3>
@@ -195,7 +201,8 @@
 <h3>
 <span class="header-section-number">6.5.5</span> Login Node VS. Compute Node<a class="anchor" aria-label="anchor" href="#login-node-vs.-compute-node"><i class="fas fa-link"></i></a>
 </h3>
-<p>Login node is for editing scripts and submitting jobs.</p>
+<p>Login node is for editing scripts and submitting jobs.
+- You can also install packages with this node.</p>
 </div>
 <div id="use-miniconda" class="section level3" number="6.5.6">
 <h3>
@@ -204,11 +211,11 @@
 <p><a href="https://docs.massive.org.au/M3/software/pythonandconda/python-miniconda.html#python-miniconda" class="uri">https://docs.massive.org.au/M3/software/pythonandconda/python-miniconda.html#python-miniconda</a></p>
 <pre><code>module load conda-install
 
-# Install miniconda to default space (/scratch/nq46/username/miniconda)
+# Install miniconda to default space (/scratch/sk54/username/miniconda)
 conda-install
 
-# Activate env
-source /scratch/nq46/username/miniconda/bin/activate
+# Init conda (modify .bashrc)
+/scratch/sk54/wlii0039/miniconda/bin/conda init
 
 # Create env (Note that there is an environment called jupyterlab that can be used)
 conda create --name myenv -f myenv.yml
@@ -235,7 +242,13 @@ conda update pkg_name=ver_num</code></pre>
 <h2>
 <span class="header-section-number">6.6</span> Useful commands<a class="anchor" aria-label="anchor" href="#useful-commands"><i class="fas fa-link"></i></a>
 </h2>
-<p><code>user_info</code></p>
+<ul>
+<li><code>user_info</code></li>
+<li><code>show_job</code></li>
+<li><code>show_cluster</code></li>
+<li>
+<code>nvidia-smi</code> (after cuda and cudnn module loaded)</li>
+</ul>
 </div>
 <div id="file-systems" class="section level2" number="6.7">
 <h2>
@@ -326,48 +339,16 @@ module purge</code></pre>
 <span class="header-section-number">6.10.2</span> Job Submission<a class="anchor" aria-label="anchor" href="#job-submission"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://docs.massive.org.au/M3/slurm/simple-batch-jobs.html" class="uri">https://docs.massive.org.au/M3/slurm/simple-batch-jobs.html</a></p>
+<ul>
+<li><code>sbatch jobs.script</code></li>
+<li><code>scancel job_id</code></li>
+</ul>
 </div>
-</div>
-<div id="workflow" class="section level2" number="6.11">
-<h2>
-<span class="header-section-number">6.11</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
-</h2>
-<p>This section records the setup of the remote machine</p>
-<pre><code># Create personal folder and clone the github repo
-cd sk54
-mkdir patrickli
-git clone https://github.com/TengMCing/automatic_visual_inference.git
-
-# Install tensorflow and init conda
-cd ~
-module load conda-install
-conda-install
-sk54_scratch/wlii0039/miniconda/bin/conda init
-conda create --name tf2-gpu
-conda install python=3.11 jupyterlab
-pip install tensorflow
-
-# Create a folder to install our own R packages
-cd sk54_scratch/wlii0039
-mkdir r_libs
-
-# Specify the library location such that `.libPaths()` will return the
-# correct library path
-cd ~
-echo "R_LIBS=~/sk54_scratch/wlii0039/r_libs" &gt; .Renviron
-
-# Install our R packages to `r_libs`
-module load R/4.0.5
-R</code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/bandicoot"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/visage"</span><span class="op">)</span></span></code></pre></div>
-
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="plan.html"><span class="header-section-number">5</span> Plan</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="hpc-status.html"><span class="header-section-number">7</span> HPC status</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -404,7 +385,6 @@ R</code></pre>
 <li><a class="nav-link" href="#job-submission"><span class="header-section-number">6.10.2</span> Job Submission</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#workflow"><span class="header-section-number">6.11</span> Workflow</a></li>
 </ul>
 
       <div class="book-extra">
@@ -422,7 +402,7 @@ R</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-06-02.</p>
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-06-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

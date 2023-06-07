@@ -57,6 +57,7 @@ ssh -l username m3.massive.org.au -X
 
 - Strudel Web (http://desktop.massive.org.au/)
 - Strudel2 (https://beta.desktop.cvl.org.au/login)
+  - Use P4 or single-T4. They both have single GPU, which is easier to be used.
 
 Great for setting up the environment interactively.
 
@@ -72,6 +73,7 @@ Great for setting up the environment interactively.
 ### Others
 
 The remote machine may have copy and paste keys different from your local machine.
+  - You can not copy and paste with the Mac keyboard!
 
 ### Jupyter Lab
 
@@ -84,6 +86,7 @@ The remote machine may have copy and paste keys different from your local machin
 ### Login Node VS. Compute Node
 
 Login node is for editing scripts and submitting jobs.
+  - You can also install packages with this node.
 
 ### Use Miniconda
 
@@ -92,11 +95,11 @@ https://docs.massive.org.au/M3/software/pythonandconda/python-miniconda.html#pyt
 ```
 module load conda-install
 
-# Install miniconda to default space (/scratch/nq46/username/miniconda)
+# Install miniconda to default space (/scratch/sk54/username/miniconda)
 conda-install
 
-# Activate env
-source /scratch/nq46/username/miniconda/bin/activate
+# Init conda (modify .bashrc)
+/scratch/sk54/wlii0039/miniconda/bin/conda init
 
 # Create env (Note that there is an environment called jupyterlab that can be used)
 conda create --name myenv -f myenv.yml
@@ -122,7 +125,10 @@ https://docs.massive.org.au/M3/connecting/strudel2/connecting-to-vscode.html
 
 ## Useful commands
 
-`user_info`
+- `user_info`
+- `show_job`
+- `show_cluster`
+- `nvidia-smi` (after cuda and cudnn module loaded)
 
 ## File systems
 
@@ -187,40 +193,5 @@ https://slurm.schedmd.com/
 
 https://docs.massive.org.au/M3/slurm/simple-batch-jobs.html
 
-## Workflow
-
-This section records the setup of the remote machine
-
-```
-# Create personal folder and clone the github repo
-cd sk54
-mkdir patrickli
-git clone https://github.com/TengMCing/automatic_visual_inference.git
-
-# Install tensorflow and init conda
-cd ~
-module load conda-install
-conda-install
-sk54_scratch/wlii0039/miniconda/bin/conda init
-conda create --name tf2-gpu
-conda install python=3.11 jupyterlab
-pip install tensorflow
-
-# Create a folder to install our own R packages
-cd sk54_scratch/wlii0039
-mkdir r_libs
-
-# Specify the library location such that `.libPaths()` will return the
-# correct library path
-cd ~
-echo "R_LIBS=~/sk54_scratch/wlii0039/r_libs" > .Renviron
-
-# Install our R packages to `r_libs`
-module load R/4.0.5
-R
-```
-
-```r
-remotes::install_github("TengMCing/bandicoot")
-remotes::install_github("TengMCing/visage")
-```
+- `sbatch jobs.script`
+- `scancel job_id`

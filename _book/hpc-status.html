@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 HPC status | Analysis Buffer</title>
+<meta name="author" content="Patrick Li">
+<meta name="description" content="7.1 Workflow This section records the setup of the remote machine. # Create personal folder and clone the github repo cd sk54 mkdir patrickli git clone...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 7 HPC status | Analysis Buffer">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://someurl.netlify.app/hpc-status.html">
+<meta property="og:description" content="7.1 Workflow This section records the setup of the remote machine. # Create personal folder and clone the github repo cd sk54 mkdir patrickli git clone...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 HPC status | Analysis Buffer">
+<meta name="twitter:description" content="7.1 Workflow This section records the setup of the remote machine. # Create personal folder and clone the github repo cd sk54 mkdir patrickli git clone...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Analysis Buffer</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="check-the-performance-of-conventional-tests-and-visual-tests-in-detecting-model-violations.html"><span class="header-section-number">1</span> Check the performance of conventional tests and visual tests in detecting model violations</a></li>
+<li><a class="" href="conventional-combine-tests.html"><span class="header-section-number">2</span> Conventional combine tests</a></li>
+<li><a class="" href="combined-tests-reset-bp-and-sw.html"><span class="header-section-number">3</span> Combined tests (RESET, BP and SW)</a></li>
+<li><a class="" href="automatic-visual-inference-system.html"><span class="header-section-number">4</span> Automatic Visual Inference System</a></li>
+<li><a class="" href="plan.html"><span class="header-section-number">5</span> Plan</a></li>
+<li><a class="" href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></li>
+<li><a class="active" href="hpc-status.html"><span class="header-section-number">7</span> HPC status</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/TengMCing/analysis_buffer">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hpc-status" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> HPC status<a class="anchor" aria-label="anchor" href="#hpc-status"><i class="fas fa-link"></i></a>
+</h1>
+<div id="workflow" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Workflow<a class="anchor" aria-label="anchor" href="#workflow"><i class="fas fa-link"></i></a>
+</h2>
+<p>This section records the setup of the remote machine.</p>
+<pre><code># Create personal folder and clone the github repo
+cd sk54
+mkdir patrickli
+git clone https://github.com/TengMCing/automatic_visual_inference.git
+
+# Install tensorflow and init conda
+cd ~
+module load conda-install
+conda-install
+sk54_scratch/wlii0039/miniconda/bin/conda init
+conda create --name tf2-gpu
+
+# Please strictly follow these two steps
+# This is the only working tf setup
+conda install python==3.7 pandas==1.3
+pip install tensorflow==2.1.0
+
+# Check if the GPU is recognized
+# Please use exactly these two libraries
+module load cuda/10.1
+module load cudnn/7.6.5.32-cuda10
+python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+
+# Create a folder to install our own R packages
+cd sk54_scratch/wlii0039
+mkdir r_libs
+
+# Specify the library location such that `.libPaths()` will return the
+# correct library path
+cd ~
+echo "R_LIBS=~/sk54_scratch/wlii0039/r_libs" &gt; .Renviron
+
+# Specify the `reticulate` environment variable
+echo "R_RETICULATE_CONDA=~/sk54_scratch/wlii0039/miniconda/bin/conda" &gt; .Renviron
+echo "R_RETICULATE_PYTHON=~/sk54_scratch/wlii0039/miniconda/conda/envs/tf2-gpu/bin/python" &gt; .Renviron
+
+# Install our R packages to `r_libs`
+module load R/4.0.5
+R</code></pre>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/bandicoot"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"TengMCing/visage"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tensorflow"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"keras"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="experience" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Experience<a class="anchor" aria-label="anchor" href="#experience"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>The Massive desktop virtual machine is great, except for the key bindings if you are using Mac. The copy and paste key never work.</li>
+<li>There are many different types of Massive desktop. P4 and single T4 are preferred since they have lower waiting time. Dual T4 and K80 are more powerful and both have 2 GPUs but it could be a waste if your program can not use multiple GPUs.</li>
+<li>Massive desktop is also very important if you want to test the correctness of your code in an environment similar to the <code>sbatch</code> cluster. You can not modify your <code>sbatch</code> job, but you can test it on Massive desktop.</li>
+<li>Libraries (dynamic or not) and software packages on Massive are often out-of-date. The latest version of R on Massive is 4.1.0-mkl which is a vesion of R linking to the Intel BLAS and LAPACK library. It is better not to use this version because it may give math result inconsistent to other machines. The R we are currently using is R 4.0.5 which is released on March 2021 missing some important feature updates such as the built-in pipe operator.</li>
+<li>The out-of-date R is usually not a big deal. But the out-of-date system tools could make you mad. For
+example, the important GPU driver <code>cuda</code> and <code>cudnn</code> provided by Massive are of version 10.1 and 7.6.5.32-cuda10 released on May 2019 and Nov 2019 respectively. Massive actually has newer version of <code>cuda</code> and <code>cudnn</code>, but I found they doesn’t actually work with the “supported” version of Python and tensorflow after reinstalling different configurations of my miniconda for 7 times. Further, some commonly used tools such as <code>conda</code> is also seriously out-of-date. Attempting to update it may also crash all of your <code>conda</code> environments.</li>
+<li>The most important difference between the cluster and our local machine is the control of the available software and the software version. You can not easily install or update any important library on the cluster. This usually forces the user to install and use the out-of-date library on their own local machine such that the code can be tested locally.</li>
+<li>The only working combination of Python, tensorflow, cuda and cudnn on Massive I found so far is Python 3.7, pandas 1.3, tensorflow 2.1.0, cuda 10.1 and cudnn 7.6.5.32-cuda10. I can not install Python 3.7 and tensorflow 2.1.0 on my local machine since Apple M1 doesn’t support them (<a href="https://developer.apple.com/metal/tensorflow-plugin/" class="uri">https://developer.apple.com/metal/tensorflow-plugin/</a>). This means I have to (1) use the out-of-date keras APIs which is possibly deprecated on the version installed on my local machine (2) test them on Massive Desktop every time.</li>
+<li>The VGG16 model spend around 30mins per epoch on thesingle T4 GPU. Training a model possibly needs around 50 epochs, so 25 hours.</li>
+<li>The CPU on Massive is not very fast, sometimes it is even slower than M1. I have enabled multiprocessing on my data setup script, but it still takes around 3 hours to generate all the images.</li>
+</ol>
+</div>
+<div id="status" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Status<a class="anchor" aria-label="anchor" href="#status"><i class="fas fa-link"></i></a>
+</h2>
+<p>After fixing numerous issues, now I can successfully launch tensorflow training scripts on both the Massive desktop and the</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hpc-status"><span class="header-section-number">7</span> HPC status</a></li>
+<li><a class="nav-link" href="#workflow"><span class="header-section-number">7.1</span> Workflow</a></li>
+<li><a class="nav-link" href="#experience"><span class="header-section-number">7.2</span> Experience</a></li>
+<li><a class="nav-link" href="#status"><span class="header-section-number">7.3</span> Status</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/TengMCing/analysis_buffer/blob/master/06-HPC_status.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/TengMCing/analysis_buffer/edit/master/06-HPC_status.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-06-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
