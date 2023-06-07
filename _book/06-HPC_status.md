@@ -69,4 +69,14 @@ example, the important GPU driver `cuda` and `cudnn` provided by Massive are of 
 
 ## Status
 
-After fixing numerous issues, now I can successfully launch tensorflow training scripts on both the Massive desktop and the  
+After fixing numerous issues, now I can successfully launch tensorflow training scripts on both the Massive desktop and the Massive cluster. The script can be written in R or Python. The R API is working correctly with tensorflow 2.1.0.
+
+I have also setup the training data for the single residual plot model. The training data contains 141602 images, where 50% of them are null images and 50% of them are not null images. They are generated from three regression model with violations, namely polynomial model, heteroskedasticity model and non-normal model. Images of AR(1) model are also prepared but they are not mixed in the training data due to the difficulty of learning. The test data contains 14162 images.
+
+### Plans
+
+1. Train a VGG16 model via Massive desktop ensuring it works on the platform.
+2. Train a VGG16 model via `sbatch` to see how long it takes.
+3. Bring in keras-tuner to optimize the hyperparameters of VGG16. (use cross-validation?)
+4. Try to use multiple GPU with `tf.distribute.MirroredStrategy()`. I also need to know how long it will take to schedule the job.
+4. Try other architecture such as ResNet. Also use keras-tuner to optimize hyperparameters.
