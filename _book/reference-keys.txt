@@ -68,6 +68,9 @@ slurm-accounts
 job-submission
 hpc-status
 workflow
+project-folder
+tensorflow
+r
 experience
 status
 plans

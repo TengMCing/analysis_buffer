@@ -4,47 +4,205 @@
 
 This section records the setup of the remote machine.
 
-```
-# Create personal folder and clone the github repo
+### Project folder 
+
+Create personal folder and clone the github repo.
+
+```bash
 cd sk54
 mkdir patrickli
 git clone https://github.com/TengMCing/automatic_visual_inference.git
+```
 
-# Install tensorflow and init conda
+### `Tensorflow`
+
+Please make sure the terminal is fresh new and **no modules** have been loaded.
+
+1. Install `miniconda`
+
+We install the miniconda with the module `conda-install`.
+
+```bash
 cd ~
 module load conda-install
 conda-install
+```
+
+2. Init `conda`
+
+Init the `conda` command. This will modify the `~/.bashrc` file.
+
+```bash
 sk54_scratch/wlii0039/miniconda/bin/conda init
-conda create --name tf2-gpu
+```
 
-# Please strictly follow these two steps
-# This is the only working tf setup
-conda install python==3.7 pandas==1.3
-pip install tensorflow==2.1.0
+Source the `~/.bashrc` to load the `conda` command.
 
-# Check if the GPU is recognized
-# Please use exactly these two libraries
-module load cuda/10.1
-module load cudnn/7.6.5.32-cuda10
+```bash
+source ~/.bashrc
+```
+
+3. Create `conda` environment
+
+We use the latest version of `Python`.
+
+```bash
+conda create --name tf python=3.11
+```
+
+Check if the GPU driver is available and the version is greater or equal to `450.80.82`. You need to run this step using a GPU node (e.g. M3 desktop with T4 GPU). 
+
+```bash
+nvidia-smi
+```
+
+4. Install `cudatoolkit`
+
+We first need to activate the conda environment. All the following steps require an activated environment.
+
+```bash
+conda activate tf
+```
+
+You may notice that the system has several available `cuda` runtime API. We can check this by running the following command.
+
+```bash
+module avil cuda
+```
+
+However, these `cuda` runtime APIs are not guaranteed to work with the desired `tensorflow` version as they may not have been tested by the `tensorflow` team (see https://www.tensorflow.org/install/source#linux for tested build configuration). Ideally, we want to use our own runtime API.
+
+This can be done by installing the desired version of `cudatoolkit` via `conda`. We specify the channel to be `conda-forge` since the package is available on that channel. And we want version `11.8.0` because `tensorflow-2.12` works nicely with this version. 
+
+```bash
+conda install -c conda-forge cudatoolkit=11.8.0
+```
+
+5. Install `cudnn`
+
+Install `cudnn` via `pip` for training neural networks with GPUs. Version `8.6.0.163` has been tested by the `tensorflow` team so we use it.
+
+```bash
+pip install nvidia-cudnn-cu11==8.6.0.163
+```
+
+Since we are using our own `cuda` runtime API and `cudnn` API, we need to tell the program where to find the dynamic libraries. On unix system, this can be done by appending new paths to the environment variable `LD_LIBRARY_PATH`. 
+
+We can setup a startup script for the `tf` `conda` environment. Once `tf` is activated, the script will be executed. The script will be placed at `miniconda/conda/envs/tf/etc/conda/activate.d`.
+
+```bash
+mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+```
+
+6. Install `tensorflow`
+
+Before we install tensorflow, we need to update `pip` to the latest version.
+
+```bash
+pip install --upgrade pip
+```
+
+Install `tensorflow` and `pillow` (needed for image preprocessing).
+
+```bash
+pip install tensorflow==2.12.*
+pip install pillow
+```
+
+7. Install `nvcc`
+
+Usually, the `cudatoolkit` will come with a `cuda` compiler, but for some reasons, it does not ship with one to the appropriate location. This can be fixed by manually installing `nvcc` via `conda`.
+
+```bash
+conda install -c nvidia cuda-nvcc=11.3.58
+```
+
+Again, we need to tell the program where to find the compiler.
+
+```bash
+printf 'export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/\n' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+mkdir -p $CONDA_PREFIX/lib/nvvm/libdevice
+cp $CONDA_PREFIX/lib/libdevice.10.bc $CONDA_PREFIX/lib/nvvm/libdevice/
+```
+
+
+8. Verify the installation
+
+Check `python` version (3.11).
+
+```bash
+python --version
+```
+
+Check `tensorflow`.
+
+```bash
+python -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+```
+
+Check if the GPU is detected.
+
+```bash
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+```
 
-# Create a folder to install our own R packages
+Use `python` to test the following code. Open another terminal, run the `nvidia-smi` command to monitor if `tensorflow` actually uses GPU.
+
+```python
+import tensorflow as tf
+mnist = tf.keras.datasets.mnist
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28, 28)),
+  tf.keras.layers.Dense(128, activation='relu'),
+  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(10)
+])
+
+model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+              
+model.fit(x_train, y_train, epochs=5)
+model.evaluate(x_test,  y_test, verbose=2)
+```
+
+### `R`
+
+We want to install some `R` libraries, but we are not allowed to write to the default library path. So we need to create a folder to store them.
+
+```bash
 cd sk54_scratch/wlii0039
 mkdir r_libs
+```
 
-# Specify the library location such that `.libPaths()` will return the
-# correct library path
+Specify the library location such that `.libPaths()` will return the correct library path.
+
+```bash
 cd ~
 echo "R_LIBS=~/sk54_scratch/wlii0039/r_libs" > .Renviron
+```
 
-# Specify the `reticulate` environment variable
+Since we may also want to use `tesnsorflow` in `R`, we need to specify some environment variables for `reticulate`.
+
+```bash
 echo "R_RETICULATE_CONDA=~/sk54_scratch/wlii0039/miniconda/bin/conda" > .Renviron
-echo "R_RETICULATE_PYTHON=~/sk54_scratch/wlii0039/miniconda/conda/envs/tf2-gpu/bin/python" > .Renviron
+echo "R_RETICULATE_PYTHON=~/sk54_scratch/wlii0039/miniconda/conda/envs/tf/bin/python" > .Renviron
+```
 
-# Install our R packages to `r_libs`
+Then, we can install our own libraries.
+
+```bash
 module load R/4.0.5
 R
 ```
+
 
 ```r
 remotes::install_github("TengMCing/bandicoot")
