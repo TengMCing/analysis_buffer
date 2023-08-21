@@ -74,6 +74,7 @@
 <li><a class="" href="plan.html"><span class="header-section-number">5</span> Plan</a></li>
 <li><a class="" href="hpc-m3-documentation.html"><span class="header-section-number">6</span> HPC (M3) Documentation</a></li>
 <li><a class="" href="hpc-status.html"><span class="header-section-number">7</span> HPC status</a></li>
+<li><a class="" href="poster.html"><span class="header-section-number">8</span> Poster</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -118,10 +119,10 @@
 <span><span class="co">#&gt;   <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #555555; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">1</span> heter_101             272.   heteroskedasticity 0.000<span style="text-decoration: underline;">269</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">2</span> heter_105               1.84 heteroskedasticity 0.824   </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">3</span> heter_110              20.6  heteroskedasticity 0.924   </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">4</span> heter_116              40.8  heteroskedasticity 0.043<span style="text-decoration: underline;">8</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">5</span> heter_120               7.97 heteroskedasticity 0.014<span style="text-decoration: underline;">7</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">6</span> heter_121              44.3  heteroskedasticity 0.060<span style="text-decoration: underline;">5</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #555555;">3</span> heter_110              20.5  heteroskedasticity 0.924   </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">4</span> heter_116              40.6  heteroskedasticity 0.043<span style="text-decoration: underline;">8</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">5</span> heter_120               8.04 heteroskedasticity 0.014<span style="text-decoration: underline;">7</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">6</span> heter_121              44.4  heteroskedasticity 0.060<span style="text-decoration: underline;">5</span></span></span></code></pre></div>
 </div>
 <div id="conventional-test-data-1" class="section level3" number="2.2.2">
 <h3>
@@ -186,7 +187,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">min_es</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">max_es</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -1.450875  6.132414</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -1.461160  6.132414</span></span></code></pre></div>
 </div>
 <div id="fit-the-model-1" class="section level3" number="2.3.2">
 <h3>
@@ -211,11 +212,11 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Deviance Residuals: </span></span>
 <span><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
-<span><span class="co">#&gt; -3.0104  -0.4070  -0.3307   0.1368   2.2719  </span></span>
+<span><span class="co">#&gt; -3.0109  -0.4070  -0.3306   0.1362   2.2717  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
 <span><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">#&gt; effect_size 0.098306   0.007402   13.28   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; effect_size 0.098421   0.007411   13.28   &lt;2e-16 ***</span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  </span></span>
 <span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
@@ -223,8 +224,8 @@
 <span><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     Null deviance: 741.18  on 279  degrees of freedom</span></span>
-<span><span class="co">#&gt; Residual deviance: 195.65  on 278  degrees of freedom</span></span>
-<span><span class="co">#&gt; AIC: 197.65</span></span>
+<span><span class="co">#&gt; Residual deviance: 195.52  on 278  degrees of freedom</span></span>
+<span><span class="co">#&gt; AIC: 197.52</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Number of Fisher Scoring iterations: 7</span></span></code></pre></div>
 </div>
@@ -244,12 +245,12 @@
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">visual_pred</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   effect_size      power log_effect_size</span></span>
-<span><span class="co">#&gt; 1   0.2343650 0.05110579      -1.4508755</span></span>
-<span><span class="co">#&gt; 2   0.2590134 0.05122343      -1.3508755</span></span>
-<span><span class="co">#&gt; 3   0.2862541 0.05135373      -1.2508755</span></span>
-<span><span class="co">#&gt; 4   0.3163597 0.05149810      -1.1508755</span></span>
-<span><span class="co">#&gt; 5   0.3496315 0.05165810      -1.0508755</span></span>
-<span><span class="co">#&gt; 6   0.3864026 0.05183548      -0.9508755</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   0.2319671 0.05109565      -1.4611597</span></span>
+<span><span class="co">#&gt; 2   0.2563633 0.05121219      -1.3611597</span></span>
+<span><span class="co">#&gt; 3   0.2833253 0.05134129      -1.2611597</span></span>
+<span><span class="co">#&gt; 4   0.3131229 0.05148431      -1.1611597</span></span>
+<span><span class="co">#&gt; 5   0.3460543 0.05164282      -1.0611597</span></span>
+<span><span class="co">#&gt; 6   0.3824491 0.05181853      -0.9611597</span></span></code></pre></div>
 </div>
 <div id="make-bootstrap-prediction-for-the-visual-model-1" class="section level3" number="2.3.4">
 <h3>
@@ -451,7 +452,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-06-14.</p>
+    <p>"<strong>Analysis Buffer</strong>" was written by Patrick Li. It was last built on 2023-08-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -36,10 +36,10 @@ head(visual_test_dat)
 #>   [3m[90m<chr>[39m[23m                  [3m[90m<dbl>[39m[23m [3m[90m<chr>[39m[23m                 [3m[90m<dbl>[39m[23m
 #> [90m1[39m heter_101             272.   heteroskedasticity 0.000[4m2[24m[4m6[24m[4m9[24m
 #> [90m2[39m heter_105               1.84 heteroskedasticity 0.824   
-#> [90m3[39m heter_110              20.6  heteroskedasticity 0.924   
-#> [90m4[39m heter_116              40.8  heteroskedasticity 0.043[4m8[24m  
-#> [90m5[39m heter_120               7.97 heteroskedasticity 0.014[4m7[24m  
-#> [90m6[39m heter_121              44.3  heteroskedasticity 0.060[4m5[24m
+#> [90m3[39m heter_110              20.5  heteroskedasticity 0.924   
+#> [90m4[39m heter_116              40.6  heteroskedasticity 0.043[4m8[24m  
+#> [90m5[39m heter_120               8.04 heteroskedasticity 0.014[4m7[24m  
+#> [90m6[39m heter_121              44.4  heteroskedasticity 0.060[4m5[24m
 ```
 
 
@@ -110,7 +110,7 @@ max_es <- vi_survey %>%
 
 ```r
 c(log(min_es), log(max_es))
-#> [1] -1.450875  6.132414
+#> [1] -1.461160  6.132414
 ```
 
 
@@ -140,11 +140,11 @@ summary(visual_mod)
 #> 
 #> Deviance Residuals: 
 #>     Min       1Q   Median       3Q      Max  
-#> -3.0104  -0.4070  -0.3307   0.1368   2.2719  
+#> -3.0109  -0.4070  -0.3306   0.1362   2.2717  
 #> 
 #> Coefficients:
 #>             Estimate Std. Error z value Pr(>|z|)    
-#> effect_size 0.098306   0.007402   13.28   <2e-16 ***
+#> effect_size 0.098421   0.007411   13.28   <2e-16 ***
 #> ---
 #> Signif. codes:  
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -152,8 +152,8 @@ summary(visual_mod)
 #> (Dispersion parameter for binomial family taken to be 1)
 #> 
 #>     Null deviance: 741.18  on 279  degrees of freedom
-#> Residual deviance: 195.65  on 278  degrees of freedom
-#> AIC: 197.65
+#> Residual deviance: 195.52  on 278  degrees of freedom
+#> AIC: 197.52
 #> 
 #> Number of Fisher Scoring iterations: 7
 ```
@@ -177,12 +177,12 @@ visual_pred <- data.frame(effect_size = exp(seq(log(min_es),
 ```r
 head(visual_pred)
 #>   effect_size      power log_effect_size
-#> 1   0.2343650 0.05110579      -1.4508755
-#> 2   0.2590134 0.05122343      -1.3508755
-#> 3   0.2862541 0.05135373      -1.2508755
-#> 4   0.3163597 0.05149810      -1.1508755
-#> 5   0.3496315 0.05165810      -1.0508755
-#> 6   0.3864026 0.05183548      -0.9508755
+#> 1   0.2319671 0.05109565      -1.4611597
+#> 2   0.2563633 0.05121219      -1.3611597
+#> 3   0.2833253 0.05134129      -1.2611597
+#> 4   0.3131229 0.05148431      -1.1611597
+#> 5   0.3460543 0.05164282      -1.0611597
+#> 6   0.3824491 0.05181853      -0.9611597
 ```
 
 ### Make bootstrap prediction for the visual model

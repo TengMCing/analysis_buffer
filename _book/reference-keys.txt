@@ -74,3 +74,4 @@ r
 experience
 status
 plans
+poster

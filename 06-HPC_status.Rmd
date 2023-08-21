@@ -173,6 +173,12 @@ model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test,  y_test, verbose=2)
 ```
 
+9. Install `keras_tuner`
+
+```bash
+pip install keras-tuner --upgrade
+```
+
 ### `R`
 
 We want to install some `R` libraries, but we are not allowed to write to the default library path. So we need to create a folder to store them.
