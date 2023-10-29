@@ -1,0 +1,114 @@
+# Literature Review
+
+## Visual Inference Paper
+
+This collection of papers all cited @buja2009statistical.
+
+### ggplot2
+
+[📄](https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wics.147)
+
+```
+@article{wickham2011ggplot2,
+  title={ggplot2},
+  author={Wickham, Hadley},
+  journal={Wiley interdisciplinary reviews: computational statistics},
+  volume={3},
+  number={2},
+  pages={180--185},
+  year={2011},
+  publisher={Wiley Online Library}
+}
+```
+
+Mention that the underlying grammar of `ggplot2` is particularly useful in graphical inference. 
+
+### Too many zeros and/or highly skewed? A tutorial on modelling health behaviour as count data with Poisson and negative binomial regression
+
+[📄](https://www.tandfonline.com/doi/abs/10.1080/21642850.2021.1920416)
+
+```
+@article{green2021too,
+  title={Too many zeros and/or highly skewed? A tutorial on modelling health behaviour as count data with Poisson and negative binomial regression},
+  author={Green, James A},
+  journal={Health Psychology and Behavioral Medicine},
+  volume={9},
+  number={1},
+  pages={436--455},
+  year={2021},
+  publisher={Taylor \& Francis}
+}
+```
+
+Mention that model metrics such as AIC are commonly used in model assessment. However, visual inspection can be a powerful model diagnostics and it often works better than formal tests in meta-analysis. The author of this paper also writes an R package `simfit` to visually check whether too many or too few zeros are produced by the assumed GLM, relative to the original data.  
+
+### Visualization in Bayesian Workflow 
+
+[📄](https://academic.oup.com/jrsssa/article-abstract/182/2/389/7070184)
+
+```
+@article{gabry2019visualization,
+  title={Visualization in Bayesian workflow},
+  author={Gabry, Jonah and Simpson, Daniel and Vehtari, Aki and Betancourt, Michael and Gelman, Andrew},
+  journal={Journal of the Royal Statistical Society Series A: Statistics in Society},
+  volume={182},
+  number={2},
+  pages={389--402},
+  year={2019},
+  publisher={Oxford University Press}
+}
+```
+
+This paper promotes the use of visualization tools in Bayesian workflow. It quotes a sentence from @buja2009statistical to emphasize the importance of visualization in quantitative statistical procedures.
+
+### Peeking Inside the Black Box: Visualizing Statistical Learning With Plots of Individual Conditional Expectation
+
+[📄](https://www.tandfonline.com/doi/abs/10.1080/10618600.2014.907095)
+
+```
+@article{goldstein2015peeking,
+  title={Peeking inside the black box: Visualizing statistical learning with plots of individual conditional expectation},
+  author={Goldstein, Alex and Kapelner, Adam and Bleich, Justin and Pitkin, Emil},
+  journal={journal of Computational and Graphical Statistics},
+  volume={24},
+  number={1},
+  pages={44--65},
+  year={2015},
+  publisher={Taylor \& Francis}
+}
+```
+
+This paper proposes a new type of plot called individual conditional expectation (ICE) plot which can better visualize any supervised learning model than the classical partial dependence plots (PDPs). It mentions that @buja2009statistical addresses the problem of assessing the statistical validity of discoveries made by examining plots. This paper also adapts the visual inference framework and proposes a new testing procedure called additivity lineup test.  
+
+## Why Authors Don't Visualize Uncertainty
+
+[📄](https://ieeexplore.ieee.org/abstract/document/8805422/)
+
+```
+@article{hullman2019authors,
+  title={Why authors don't visualize uncertainty},
+  author={Hullman, Jessica},
+  journal={IEEE transactions on visualization and computer graphics},
+  volume={26},
+  number={1},
+  pages={130--139},
+  year={2019},
+  publisher={IEEE}
+}
+```
+
+This paper conducts a survey to understand why do so many visualization authors choose not to visualize uncertainty. It mentions several statisticians have proposed that the process by which a person visually examine a graph to evaluate the strength of evidence is analogous to a statistical test. While the primary goal of these analogies has been to define methods for generating visualizations to compare to observed data, accounts by @buja2009statistical also acknowledge the role visualizations play in informal statistical inference. In this process, a visualization is compared to an implicit reference distribution to determine whether the visualization presents something interesting. 
+
+
+
+<!-- ## Dimensionality Reduction by Learning an Invariant Mapping -->
+
+<!-- Dimensionality reduction involves mapping a set of high dimensional input points onto a low dimensional manifold so that "similar" points in input space are mapped to nearby points on the manifold. -->
+
+<!-- - **Our lineup image can be considered as a high dimensional input point.** -->
+
+<!-- - learning a globally coherent nonlinear function that maps the data evenly to the output manifold -->
+<!-- - The learning relies solely on neighborhood relationships and does not require any distancemeasure in the input space.  -->
+
+
+<!-- ## Learning Fine-grained Image Similarity with Deep Ranking -->
